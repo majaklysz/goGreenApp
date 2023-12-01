@@ -1,0 +1,340 @@
+{
+  "recipes": {
+    "mattressCleaner": {
+      "name": "Mattress Cleaner",
+      "benefits": "This homemade mattress cleaner is cost-effective, environmentally friendly, and contributes to a healthier sleep environment without harsh chemicals.",
+      "ingredients": [
+        {
+          "name": "Baking Soda",
+          "purpose": "Acts as a deodorizer and helps absorb moisture."
+        },
+        {
+          "name": "Essential Oils",
+          "types": ["Tea Tree", "Lavender", "Eucalyptus"],
+          "purpose": "Provide a natural, pleasant fragrance and have antimicrobial properties."
+        }
+      ],
+      "instructions": [
+        {
+          "step": "Gather your ingredients",
+          "description": "Assemble baking soda and your chosen essential oils. Essential oils add a pleasant scent and contribute to the cleaning process with their natural antimicrobial properties."
+        },
+        {
+          "step": "Create the cleaning mixture",
+          "description": "In a bowl, combine 1 cup of baking soda with 10-15 drops of your chosen essential oil. Stir the mixture well to ensure even distribution of the essential oil."
+        },
+        {
+          "step": "Let the mixture sit",
+          "description": "Allow the mixture to sit for a few minutes, letting the baking soda absorb the aromatic essence of the essential oils."
+        },
+        {
+          "step": "Apply to the mattress",
+          "description": "Sprinkle the baking soda mixture evenly over the entire surface of the mattress, focusing on areas with stains or odors. Use a sieve or a fine-mesh strainer for an even application."
+        },
+        {
+          "step": "Gently rub in",
+          "description": "Using a soft brush or your hands (protected with gloves if you prefer), gently rub the mixture into the mattress surface to help the baking soda penetrate deeper and absorb moisture or odors."
+        },
+        {
+          "step": "Let it sit",
+          "description": "Leave the mixture on the mattress for at least 30 minutes. If possible, leave it on for a few hours or overnight for a more thorough cleaning."
+        },
+        {
+          "step": "Vacuum the mattress",
+          "description": "Use a vacuum cleaner with an upholstery attachment to thoroughly vacuum the mattress, removing the baking soda mixture along with any dirt, dust, or odors."
+        },
+        {
+          "step": "Air out the mattress",
+          "description": "If weather permits, let the mattress air out in a well-ventilated area to ensure any remaining odors dissipate."
+        },
+        {
+          "step": "Make the bed",
+          "description": "Once the mattress is completely dry and odor-free, make the bed with fresh linens."
+        }
+      ],
+      "note": "Always test a small, inconspicuous area of your mattress before applying the mixture to ensure compatibility. This eco-friendly mattress cleaner is a great way to maintain a clean and fresh sleep environment without exposing yourself to harsh chemicals."
+    },
+
+    "allPurposeCleaner": {
+      "name": "All-Purpose Cleaner",
+      "benefits": "This DIY all-purpose cleaner is gentle on the environment, effective on various surfaces, and reduces exposure to harmful substances for a healthier living space.",
+      "ingredients": [
+        {
+          "name": "White Distilled Vinegar",
+          "purpose": "Known for its antibacterial and deodorizing properties."
+        },
+        {
+          "name": "Water",
+          "purpose": "Acts as a diluent for the vinegar, ensuring a safe yet effective cleaning solution."
+        },
+        {
+          "name": "Lemon Peels",
+          "optional": true,
+          "purpose": "Adds a natural, pleasant scent and enhances cleaning power."
+        },
+        {
+          "name": "Essential Oils",
+          "optional": true,
+          "types": ["Tea Tree", "Eucalyptus", "Lavender"],
+          "purpose": "Adds fragrance and additional antimicrobial properties."
+        }
+      ],
+      "instructions": [
+        {
+          "step": "Gather your ingredients",
+          "description": "Collect white distilled vinegar, water, lemon peels, and essential oils of your choice."
+        },
+        {
+          "step": "Prepare the Citrus-Infused Vinegar",
+          "description": "If using lemon peels, place them in a glass jar and cover them with white distilled vinegar. Allow this mixture to sit for at least a week to infuse the vinegar with citrus oils."
+        },
+        {
+          "step": "Mix the All-Purpose Cleaner",
+          "description": "In a spray bottle, combine equal parts of the citrus-infused vinegar and water. For example, you can start with one cup of each."
+        },
+        {
+          "step": "Add Essential Oils (Optional)",
+          "description": "If desired, add 10-15 drops of essential oils to the mixture. Essential oils not only contribute to the cleaner's fragrance but also offer additional antimicrobial properties."
+        },
+        {
+          "step": "Shake Well",
+          "description": "Secure the spray bottle's lid and shake the mixture well to ensure thorough blending of all ingredients."
+        },
+        {
+          "step": "Test in a Small Area",
+          "description": "Before using the cleaner on a larger surface, test it in a small, inconspicuous area to ensure compatibility."
+        },
+        {
+          "step": "Spray and Wipe",
+          "description": "Spray the all-purpose cleaner directly onto surfaces like countertops, tables, or kitchen appliances. Wipe with a clean cloth or sponge."
+        },
+        {
+          "step": "Enjoy the Freshness",
+          "description": "Revel in the fresh and clean scent while appreciating the fact that you've chosen an eco-friendly alternative for your cleaning needs."
+        }
+      ],
+      "note": "This all-purpose cleaner is safe for most surfaces but may not be suitable for certain delicate materials. Always test in a small area first and avoid using on surfaces that could be damaged by acidic solutions."
+    },
+    "washingDetergent": {
+      "name": "Washing Detergent",
+      "benefits": "This DIY laundry detergent offers a green alternative to commercial products, reducing your environmental footprint and avoiding harsh chemicals. It's gentle on fabrics, effective in cleaning, and allows you to customize scents with natural ingredients.",
+      "ingredients": [
+        {
+          "name": "Castile Soap (Liquid)",
+          "purpose": "A plant-based soap that serves as a gentle cleanser."
+        },
+        {
+          "name": "Washing Soda",
+          "purpose": "Boosts cleaning power and helps soften water."
+        },
+        {
+          "name": "Baking Soda",
+          "purpose": "Enhances cleaning and neutralizes odors."
+        },
+        {
+          "name": "Essential Oils",
+          "optional": true,
+          "types": ["Lavender", "Tea Tree", "Eucalyptus"],
+          "purpose": "Choose scents for a natural fragrance."
+        }
+      ],
+      "instructions": [
+        {
+          "step": "Gather your ingredients",
+          "description": "Collect liquid castile soap, washing soda, baking soda, and optional essential oils."
+        },
+        {
+          "step": "Mix the Laundry Detergent",
+          "description": "In a large bowl, combine 1 cup of liquid castile soap, 1 cup of washing soda, and 1 cup of baking soda. Stir the mixture thoroughly until all ingredients are well blended."
+        },
+        {
+          "step": "Add Essential Oils (Optional)",
+          "description": "If you desire a specific fragrance, add 10-15 drops of your chosen essential oils to the mixture. Stir well to distribute the oils evenly."
+        },
+        {
+          "step": "Transfer to a Container",
+          "description": "Pour the detergent mixture into a sealable container, such as a glass jar or an old detergent bottle."
+        },
+        {
+          "step": "Use",
+          "description": "Use 1/4 to 1/2 cup of your homemade detergent per load, depending on the size and soil level of the laundry."
+        },
+        {
+          "step": "Store",
+          "description": "Seal the container and store it in a cool, dry place. Remember to shake or stir the detergent before each use, as natural ingredients may settle over time."
+        }
+      ],
+      "note": "This eco-friendly laundry detergent is suitable for standard and high-efficiency washing machines. It is free from synthetic fragrances and harsh chemicals, making it a gentle option for those with sensitive skin. Always test a small amount on your laundry before using it regularly, especially for delicate fabrics. Adjust the quantity based on your laundry needs and machine specifications."
+    },
+    "floorCleaner": {
+      "name": "Floor Cleaner",
+      "benefits": "This DIY floor cleaner offers a sustainable and effective solution for keeping your floors clean without the use of harsh chemicals. It is safe for most floor types and contributes to a healthier indoor environment.",
+      "ingredients": [
+        {
+          "name": "White Distilled Vinegar",
+          "purpose": "Known for its natural cleaning and disinfectant properties."
+        },
+        {
+          "name": "Water",
+          "purpose": "Serves as a diluent for the vinegar, ensuring safe and streak-free cleaning."
+        },
+        {
+          "name": "Liquid Castile Soap",
+          "purpose": "Provides a gentle and plant-based cleanser for various floor surfaces."
+        },
+        {
+          "name": "Essential Oils",
+          "optional": true,
+          "types": ["Lemon", "Eucalyptus", "Tea Tree"],
+          "purpose": "Choose scents for added fragrance and antibacterial properties."
+        }
+      ],
+      "instructions": [
+        {
+          "step": "Gather your ingredients",
+          "description": "Collect white distilled vinegar, water, liquid castile soap, and optional essential oils."
+        },
+        {
+          "step": "Mix the Floor Cleaner",
+          "description": "In a bucket, combine 1 cup of white distilled vinegar, 1 gallon of water, and 2 tablespoons of liquid castile soap. If desired, add 10-15 drops of essential oils for fragrance and additional cleaning properties."
+        },
+        {
+          "step": "Stir Well",
+          "description": "Mix the ingredients thoroughly to ensure an even distribution of the cleaning agents."
+        },
+        {
+          "step": "Test in a Small Area",
+          "description": "Before applying the cleaner to the entire floor, test it in a small, inconspicuous area to ensure compatibility with your flooring material."
+        },
+        {
+          "step": "Mop the Floors",
+          "description": "Use the mixture to mop your floors, wringing out excess liquid to avoid over-wetting. For hardwood floors, use a damp mop rather than a wet one."
+        },
+        {
+          "step": "Air Dry",
+          "description": "Allow the floors to air dry naturally. The vinegar smell will dissipate as the floors dry."
+        },
+        {
+          "step": "Enjoy Clean and Refreshed Floors",
+          "description": "Revel in the clean and refreshed state of your floors, knowing that you've used an eco-friendly alternative for your cleaning routine."
+        }
+      ],
+      "note": "This floor cleaner is suitable for a variety of hard floor surfaces, including tile, laminate, and vinyl. Avoid using it on porous surfaces like unsealed hardwood. Adjust the quantities based on the size of the area you're cleaning."
+    },
+    "ovenCleaner": {
+      "name": "Oven Cleaner",
+      "benefits": "This DIY oven cleaner provides a powerful solution for tackling grease and grime without resorting to harsh chemicals. By using natural ingredients, you create an eco-friendly alternative that's both effective and safe for your kitchen.",
+      "ingredients": [
+        {
+          "name": "Baking Soda",
+          "purpose": "A gentle abrasive that helps lift stubborn residue."
+        },
+        {
+          "name": "White Distilled Vinegar",
+          "purpose": "Known for its cleaning and deodorizing properties."
+        },
+        { "name": "Water", "purpose": "Serves as a diluent for the mixture." },
+        {
+          "name": "Lemon Juice",
+          "optional": true,
+          "purpose": "Adds natural acidity and a fresh scent."
+        },
+        {
+          "name": "Essential Oils",
+          "optional": true,
+          "types": ["Tea Tree", "Lemon", "Eucalyptus"],
+          "purpose": "Choose oils for additional cleaning properties and fragrance."
+        }
+      ],
+      "instructions": [
+        {
+          "step": "Gather your ingredients",
+          "description": "Collect baking soda, white distilled vinegar, water, lemon juice, and optional essential oils."
+        },
+        {
+          "step": "Make a Paste",
+          "description": "In a bowl, mix 1 cup of baking soda with enough water to create a thick paste. Adjust the water amount as needed."
+        },
+        {
+          "step": "Apply the Paste",
+          "description": "Spread the baking soda paste evenly on the interior surfaces of your oven, focusing on areas with stubborn grease and grime. Avoid the heating elements."
+        },
+        {
+          "step": "Let It Sit",
+          "description": "Allow the paste to sit for at least 30 minutes or longer for heavily soiled ovens. This gives the baking soda time to break down the residue."
+        },
+        {
+          "step": "Prepare the Vinegar Solution",
+          "description": "Mix equal parts white distilled vinegar and water in a spray bottle. Add 1-2 tablespoons of lemon juice and 10-15 drops of essential oils if desired."
+        },
+        {
+          "step": "Spray and Wipe",
+          "description": "Spray the vinegar solution onto the baking soda-covered surfaces. The mixture will fizz, helping to break down the residue. Wipe away the dissolved grime with a damp cloth or sponge."
+        },
+        {
+          "step": "Rinse",
+          "description": "Rinse the interior of the oven with a clean, damp cloth to remove any remaining baking soda residue."
+        },
+        {
+          "step": "Air Out the Oven",
+          "description": "Leave the oven door open for a while to allow any remaining vinegar scent to dissipate."
+        },
+        {
+          "step": "Enjoy a Sparkling Clean Oven",
+          "description": "Admire your oven's renewed cleanliness, achieved with an eco-friendly and effective cleaning solution."
+        }
+      ],
+      "note": "This eco-friendly oven cleaner is suitable for regular cleaning. For extremely stubborn stains, you may need to repeat the process or use a scrub brush. Always let the oven cool completely before cleaning, and avoid using this mixture on self-cleaning ovens or surfaces that could be damaged by acidic solutions."
+    },
+    "windowCleaner": {
+      "name": "Window Cleaner",
+      "benefits": "This homemade window cleaner provides a streak-free shine and promotes an eco-friendly approach to household cleaning, reducing your environmental impact.",
+      "ingredients": [
+        {
+          "name": "White Distilled Vinegar",
+          "purpose": "Known for its cleaning and deodorizing properties."
+        },
+        {
+          "name": "Water",
+          "purpose": "Serves as a diluent for the vinegar, aiding in streak-free cleaning."
+        },
+        {
+          "name": "Cornstarch",
+          "purpose": "Enhances cleaning power, helping to dissolve dirt and grime."
+        },
+        {
+          "name": "Lemon Juice",
+          "optional": true,
+          "purpose": "Adds a pleasant citrus scent and boosts cleaning efficacy."
+        }
+      ],
+      "instructions": [
+        {
+          "step": 1,
+          "description": "Gather your ingredients. Collect white distilled vinegar, water, cornstarch, and optional lemon juice."
+        },
+        {
+          "step": 2,
+          "description": "Mix the Window Cleaner. In a spray bottle, combine 1 cup of white distilled vinegar with 1 cup of water. Add 1 tablespoon of cornstarch. If desired, include 1-2 tablespoons of lemon juice for fragrance."
+        },
+        {
+          "step": 3,
+          "description": "Shake Well. Secure the spray bottle's lid and shake the mixture thoroughly to ensure all ingredients are well blended."
+        },
+        {
+          "step": 4,
+          "description": "Test in a Small Area. Before using the cleaner on entire windows, test it in a small, inconspicuous area to ensure compatibility."
+        },
+        {
+          "step": 5,
+          "description": "Spray and Wipe. Spray the window cleaner onto the glass surface and wipe it away with a lint-free cloth or paper towel. Work in a circular motion for best results."
+        },
+        {
+          "step": 6,
+          "description": "Enjoy Streak-Free Windows. Admire your clean, streak-free windows and enjoy the benefits of an eco-friendly alternative to commercial cleaners."
+        }
+      ],
+      "note": "This eco-friendly window cleaner is suitable for most glass surfaces. However, avoid using it on extremely hot or sunny days, as the solution may dry too quickly, potentially leaving streaks. Adjust the ingredients, if needed, based on the size of your spray bottle and the surface area you plan to clean."
+    }
+  }
+}
