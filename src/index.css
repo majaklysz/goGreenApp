@@ -11,6 +11,8 @@ body {
   font-family: "Lato";
   background: var(--background);
   color: white;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .cta {
@@ -36,4 +38,11 @@ body {
   font-weight: bold;
   font-family: "Lato";
   font-size: 1.2em;
+}
+
+a {
+  color: var(--green);
+  font-weight: bold;
+  font-size: 1.2em;
+  text-decoration: none;
 }
