@@ -1,0 +1,46 @@
+.pageAuth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 24px;
+  margin-top: 25%;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.formLogin button {
+  margin-top: 16px;
+}
+
+.formLogin input {
+  background: none;
+  border: 1px solid white;
+  padding: 16px 24px;
+  font-size: 1em;
+  border-radius: 10px;
+  color: white;
+}
+
+.formLogin input:focus {
+  background: white;
+  color: var(--background);
+}
+
+.underLogo {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+h1 {
+  font-size: 2.5em;
+}
