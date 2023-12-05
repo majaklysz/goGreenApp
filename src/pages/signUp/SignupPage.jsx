@@ -54,7 +54,7 @@ export default function SignupPage() {
       <div className="pageAuth">
         <img
           className="logo"
-          src="src/assets/icons/logo2.svg"
+          src="/src/assets/icons/logo2.svg"
           alt="logo greenclean"
         />
         <p className="underLogo">
@@ -99,7 +99,7 @@ export default function SignupPage() {
             className={isDisabled ? "gray-button" : "ctaA"}
           >
             Sign Up
-            <img src="src/assets/icons/fi-rr-angle-right.svg" alt="arrow" />
+            <img src="/src/assets/icons/fi-rr-angle-right.svg" alt="arrow" />
           </button>
         </form>
         <p className="text">

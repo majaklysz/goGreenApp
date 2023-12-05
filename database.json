@@ -342,5 +342,67 @@
       "name": "John Doe",
       "email": "john.doe@example.com"
     }
-  }
+  },
+  "rooms": [
+    {
+      "name": "Living Room",
+      "chores": [
+        "Dust surfaces and electronics.",
+        "Vacuum or sweep floors.",
+        "Clean and disinfect remote controls.",
+        "Vacuum or clean upholstery and curtains.",
+        "Organize and declutter."
+      ]
+    },
+    {
+      "name": "Bedroom",
+      "chores": [
+        "Change bed linens.",
+        "Dust and wipe surfaces.",
+        "Vacuum or clean floors.",
+        "Clean mirrors and glass.",
+        "Organize and declutter."
+      ]
+    },
+    {
+      "name": "Kitchen",
+      "chores": [
+        "Wipe kitchen countertops.",
+        "Clean and sanitize the sink.",
+        "Clean appliances inside and out.",
+        "Sweep and mop floors.",
+        "Empty and clean trash bins."
+      ]
+    },
+    {
+      "name": "Bathroom",
+      "chores": [
+        "Scrub and disinfect toilet, sink, and tub.",
+        "Clean mirrors and glass.",
+        "Wipe bathroom surfaces.",
+        "Replace or wash shower curtains and bath mats.",
+        "Clean and organize cabinets."
+      ]
+    },
+    {
+      "name": "Dining Room",
+      "chores": [
+        "Clean and polish dining table and chairs.",
+        "Vacuum or clean floors.",
+        "Wipe and sanitize glassware.",
+        "Dust and clean decorative items.",
+        "Organize and declutter."
+      ]
+    },
+    {
+      "name": "Home Office/Study",
+      "chores": [
+        "Dust and wipe down desk and electronics.",
+        "Organize and declutter paperwork.",
+        "Vacuum or clean floors.",
+        "Sanitize frequently touched surfaces.",
+        "Clean windows and glass surfaces."
+      ]
+    }
+  ]
 }
