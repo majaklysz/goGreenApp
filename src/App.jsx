@@ -6,6 +6,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "./pages/home/Home";
 import NavBottom from "./assets/components/navBottom/NavBottom";
 import NavTop from "./assets/components/NavTop/NavTop";
+import AddingRoomPage from "./pages/addingRoom/AddingRoomPage";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
@@ -30,6 +31,7 @@ export default function App() {
       <NavTop />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/addRoom" element={<AddingRoomPage />} />
       </Routes>
       <NavBottom />
     </>

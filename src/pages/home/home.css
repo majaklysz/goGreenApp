@@ -1,0 +1,21 @@
+.heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 16px;
+}
+
+.heading h1 {
+  font-size: 1.5em;
+}
+
+.placeholderRooms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 33%;
+}

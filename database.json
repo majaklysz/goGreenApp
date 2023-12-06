@@ -340,9 +340,20 @@
   "users": {
     "user_id_1": {
       "name": "John Doe",
-      "email": "john.doe@example.com"
+      "email": "john.doe@example.com",
+      "userRooms": {
+        "room_id_1": {
+          "room_name": "Living Room",
+          "other_room_property": "value"
+        },
+        "room_id_2": {
+          "room_name": "Bedroom",
+          "other_room_property": "value"
+        }
+      }
     }
   },
+
   "rooms": [
     {
       "name": "Living Room",

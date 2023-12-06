@@ -1,7 +1,7 @@
 .navBottom {
   background: var(--green);
   border-radius: 50px 50px 0 0;
-  height: 150px;
+  height: 100px;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -19,7 +19,7 @@
 }
 
 .navbox img {
-  width: 35px;
+  width: 30px;
 }
 
 .navbox a {
@@ -34,4 +34,8 @@
 .navbox a.active {
   font-weight: 900;
   color: var(--background);
+}
+
+.navbox p {
+  font-size: 1rem;
 }
