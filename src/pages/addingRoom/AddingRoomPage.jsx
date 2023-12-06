@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "./firebase-config.js";
+import { getAuth } from "@firebase/auth";
+import { useNavigate } from "react-router-dom";
+import "../addingRoom/adding.css";
 
 export default function AddingRoomPage() {
-  const auth = useAuth();
+  const auth = getAuth();
 
   const [rooms, setRooms] = useState([]);
   const [customRoomName, setCustomRoomName] = useState("");
   const [chosenRoomName, setChosenRoomName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch room names when the component mounts
@@ -19,8 +22,12 @@ export default function AddingRoomPage() {
       const response = await fetch(url);
       const data = await response.json();
 
-      if (data) {
+      console.log("Fetched room names:", data);
+
+      if (Array.isArray(data)) {
         setRooms(data);
+      } else {
+        console.error("Invalid data format. Expected an array.");
       }
     } catch (error) {
       console.error("Error fetching room names:", error);
@@ -29,33 +36,47 @@ export default function AddingRoomPage() {
 
   async function addRoom() {
     try {
-      let userRooms = { ...rooms };
+      // Fetch existing user data from the database
+      const userUrl = `${import.meta.env.VITE_FIREBASE_DB_URL}users/${
+        auth.currentUser.uid
+      }.json`;
+      const userResponse = await fetch(userUrl);
+      const existingUserData = await userResponse.json();
+
+      // Initialize or update userRooms
+      let userRooms = { ...(existingUserData?.userRooms || {}) };
 
       if (chosenRoomName === "Other" && customRoomName !== "") {
         // User selected "Other" and provided a custom room name
         const newRoomId = generateRoomId();
 
-        userRooms[newRoomId] = {
-          room_name: customRoomName,
-          // Add other properties as needed
+        userRooms = {
+          ...userRooms,
+          [newRoomId]: {
+            room_name: customRoomName,
+            // Add other properties as needed
+          },
         };
       } else if (chosenRoomName !== "") {
         // User selected a room from the list
         const newRoomId = generateRoomId();
 
-        userRooms[newRoomId] = {
-          room_name: chosenRoomName,
-          // Add other properties as needed
+        userRooms = {
+          ...userRooms,
+          [newRoomId]: {
+            room_name: chosenRoomName,
+            // Add other properties as needed
+          },
         };
       }
 
       // Save the updated userRooms to the database
-      const saveUrl = `${import.meta.env.VITE_FIREBASE_DB_URL}${
+      const saveUserUrl = `${import.meta.env.VITE_FIREBASE_DB_URL}users/${
         auth.currentUser.uid
-      }/userRooms.json`;
-      await fetch(saveUrl, {
-        method: "PUT",
-        body: JSON.stringify(userRooms),
+      }.json`;
+      await fetch(saveUserUrl, {
+        method: "PATCH", // Use PATCH to update existing data
+        body: JSON.stringify({ userRooms }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -65,6 +86,8 @@ export default function AddingRoomPage() {
       setCustomRoomName("");
       setChosenRoomName("");
       fetchRoomNames(); // Refresh the room list
+
+      navigate("/");
     } catch (error) {
       console.error("Error adding room:", error);
     }
@@ -77,36 +100,40 @@ export default function AddingRoomPage() {
 
   return (
     <section>
-      <h2>Room Name:</h2>
+      <div className="addingRoomcontent">
+        <h2>Room Name:</h2>
 
-      <label>Select or enter a room name:</label>
-      <select
-        value={chosenRoomName}
-        onChange={(e) => setChosenRoomName(e.target.value)}
-      >
-        <option value="" disabled>
-          Select a room name
-        </option>
-        {rooms.map((room) => (
-          <option key={room.room_name} value={room.room_name}>
-            {room.room_name}
+        <select
+          className="selectionRoom"
+          value={chosenRoomName}
+          onChange={(e) => setChosenRoomName(e.target.value)}
+        >
+          <option value="" disabled>
+            Select a room name
           </option>
-        ))}
-        <option value="Other">Other</option>
-      </select>
+          {rooms.map((room) => (
+            <option key={room.name} value={room.name}>
+              {room.name}
+            </option>
+          ))}
+          <option value="Other">Other</option>
+        </select>
+        {chosenRoomName === "Other" && (
+          <div className="customRoomName">
+            <label>Custom Room Name:</label>
+            <input
+              type="text"
+              value={customRoomName}
+              onChange={(e) => setCustomRoomName(e.target.value)}
+            />
+          </div>
+        )}
 
-      {chosenRoomName === "Other" && (
-        <div>
-          <label>Custom Room Name:</label>
-          <input
-            type="text"
-            value={customRoomName}
-            onChange={(e) => setCustomRoomName(e.target.value)}
-          />
-        </div>
-      )}
-
-      <button onClick={addRoom}>Add Room</button>
+        <button className="cta" onClick={addRoom}>
+          <img src="src/assets/icons/fi-rr-plus-small.svg" alt="" />
+          Add Room
+        </button>
+      </div>
     </section>
   );
 }

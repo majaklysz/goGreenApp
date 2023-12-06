@@ -17,5 +17,34 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  margin-top: 33%;
+  margin: 33% auto;
+}
+
+.roomsContent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.roomItem {
+  height: 96px;
+  width: 130px;
+  max-width: 155px;
+  background-color: var(--green);
+  color: var(--background);
+  font-size: 1.1rem;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 10px;
+}
+
+div.roomItem {
+  display: flex;
+  align-items: end;
+}
+
+div.roomsContent {
+  padding-left: 24px;
+  padding-right: 24px;
 }

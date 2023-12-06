@@ -1,9 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import "./navtop.css";
 
 export default function NavTop() {
+  const navigate = useNavigate();
   return (
     <nav className="navtop">
-      <img className="logo" src="src/assets/icons/logo.svg" alt="" />
+      <img
+        onClick={() => navigate("/")}
+        className="logo"
+        src="src/assets/icons/logo.svg"
+        alt=""
+      />
       <div className="user">
         <div className="streak"> 7 🔥 </div>
         <div>
