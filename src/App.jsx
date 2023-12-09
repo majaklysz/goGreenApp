@@ -8,6 +8,7 @@ import NavBottom from "./assets/components/navBottom/NavBottom";
 import NavTop from "./assets/components/NavTop/NavTop";
 import AddingRoomPage from "./pages/addingRoom/AddingRoomPage";
 import RoomPage from "./pages/roomPage/RoomPage";
+import AddingTaskPage from "./pages/addingTasks/AddingTaskPage";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/addRoom" element={<AddingRoomPage />} />
         <Route path="/:roomId" element={<RoomPage />} />
+        <Route path="/addTask/:roomId" element={<AddingTaskPage />} />
       </Routes>
       <NavBottom />
     </>
@@ -43,7 +45,7 @@ export default function App() {
       <Routes>
         <Route path="/log-in" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
-        <Route path="*" element={<Navigate to="/log-in" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );

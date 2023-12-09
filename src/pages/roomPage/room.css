@@ -35,3 +35,11 @@
   align-items: center;
   margin: 33% auto;
 }
+
+.tasksContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+}

@@ -1,0 +1,52 @@
+.notDoneTask {
+  border: 1px solid var(--green);
+  color: var(--green);
+}
+
+.taskDone {
+  border: 1px solid var(--darkGreen);
+  background: var(--darkGreen);
+  color: var(--background);
+}
+
+.dueTodayTask {
+  border: 1px solid var(--green);
+  color: var(--background);
+  background: var(--green);
+}
+
+.notDoneTask input,
+.dueTodayTask input,
+.taskDone input {
+  width: 30px;
+  height: 30px;
+}
+
+.notDoneTask,
+.dueTodayTask,
+.taskDone {
+  display: flex;
+  width: 80%;
+  padding: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  border-radius: 5px;
+  margin-bottom: 24px;
+}
+
+.taskDone p,
+.taskDone h3 {
+  text-decoration: line-through;
+}
+
+.taskCard p {
+  font-size: 1rem;
+  margin: unset;
+}
+
+.taskCard h3 {
+  font-size: 1.5rem;
+  margin: unset;
+}

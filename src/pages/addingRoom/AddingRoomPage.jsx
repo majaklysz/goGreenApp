@@ -5,7 +5,6 @@ import "../addingRoom/adding.css";
 
 export default function AddingRoomPage() {
   const auth = getAuth();
-
   const [rooms, setRooms] = useState([]);
   const [customRoomName, setCustomRoomName] = useState("");
   const [chosenRoomName, setChosenRoomName] = useState("");

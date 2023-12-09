@@ -1,0 +1,76 @@
+.taskNameBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.taskNameBox input {
+  width: 80%;
+  padding: 16px 24px;
+  font-size: 1.5rem;
+  background: #3d4238;
+  color: var(--green);
+  border-radius: 10px;
+  margin-bottom: 50px;
+  border: none;
+  margin-top: 16px;
+}
+
+.freqNumber input {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  font-size: 1.3rem;
+  background: #3d4238;
+  color: var(--green);
+  border-radius: 10px;
+  border: none;
+}
+
+.inputBoxTask {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 48px;
+}
+
+.freqType {
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  font-size: 1.3rem;
+  background: #3d4238;
+  color: var(--green);
+  border-radius: 10px;
+  border: none;
+}
+
+.contentTaskAdd {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem;
+  margin-top: 24px;
+}
+
+.freqTaskBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.addButtonTasks {
+  margin-top: 100px;
+}
+
+.goBackArrowTasks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
