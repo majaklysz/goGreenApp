@@ -65,6 +65,33 @@ export default function TaskComponent({ task }) {
     dueInDays === 0 ? "dueTodayTask" : "",
   ].join(" ");
 
+  useEffect(() => {
+    let timeout;
+    if (isDone) {
+      // Uncheck the checkbox and reset the component after 2 seconds
+      timeout = setTimeout(() => {
+        setIsDone(false);
+        setDueInDays(
+          calculateDueInDays(
+            task.dueDate,
+            task.frequencyType,
+            task.frequencyNumber
+          )
+        );
+        // Increment the key to remount the component
+        setKey((prevKey) => prevKey + 1);
+      }, 2000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [
+    isDone,
+    task.dueDate,
+    task.frequencyType,
+    task.frequencyNumber,
+    calculateDueInDays,
+  ]);
+
   const handleCheckboxChange = () => {
     setIsDone((prevIsDone) => !prevIsDone);
   };
