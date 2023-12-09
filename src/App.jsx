@@ -38,6 +38,7 @@ export default function App() {
         <Route path="/:roomId" element={<RoomPage />} />
         <Route path="/addTask/:roomId" element={<AddingTaskPage />} />
         <Route path="/dailyList" element={<DailyListPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <NavBottom />
     </>
@@ -47,7 +48,7 @@ export default function App() {
       <Routes>
         <Route path="/log-in" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/log-in" />} />
       </Routes>
     </>
   );
