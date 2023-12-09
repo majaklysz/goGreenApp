@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
-
 import { useState, useEffect, useCallback } from "react";
 import "../taskComponent/taskCard.css";
 
 export default function TaskComponent({ task }) {
   const [isDone, setIsDone] = useState(false);
-  const [key, setKey] = useState(0); // Introduce a key to remount the component
 
   const calculateDueInDays = useCallback(
     (dueDate, frequencyType, frequencyNumber) => {
@@ -59,16 +57,10 @@ export default function TaskComponent({ task }) {
     isDone,
   ]);
 
-  const taskClasses = [
-    "taskCard",
-    isDone ? "taskDone" : "notDoneTask",
-    dueInDays === 0 ? "dueTodayTask" : "",
-  ].join(" ");
-
   useEffect(() => {
     let timeout;
     if (isDone) {
-      // Uncheck the checkbox and reset the component after 2 seconds
+      // Reset the component after 2 seconds
       timeout = setTimeout(() => {
         setIsDone(false);
         setDueInDays(
@@ -78,8 +70,6 @@ export default function TaskComponent({ task }) {
             task.frequencyNumber
           )
         );
-        // Increment the key to remount the component
-        setKey((prevKey) => prevKey + 1);
       }, 2000);
     }
 
@@ -90,14 +80,21 @@ export default function TaskComponent({ task }) {
     task.frequencyType,
     task.frequencyNumber,
     calculateDueInDays,
+    setDueInDays, // Include setDueInDays in the dependency array
   ]);
 
-  const handleCheckboxChange = () => {
-    setIsDone((prevIsDone) => !prevIsDone);
+  const taskClasses = [
+    "taskCard",
+    isDone ? "taskDone" : "notDoneTask",
+    dueInDays === 0 ? "dueTodayTask" : "",
+  ].join(" ");
+
+  const handleDoneButtonClick = () => {
+    setIsDone(true);
   };
 
   return (
-    <div key={key} className={taskClasses} id="taskCard">
+    <div className={taskClasses} id="taskCard">
       <div>
         <h3>{task.name}</h3>
         {dueInDays === 0 ? (
@@ -108,7 +105,7 @@ export default function TaskComponent({ task }) {
           </p>
         )}
       </div>
-      <input type="checkbox" checked={isDone} onChange={handleCheckboxChange} />
+      <button onClick={handleDoneButtonClick}>Done</button>
     </div>
   );
 }

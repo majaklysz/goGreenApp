@@ -9,6 +9,7 @@ import NavTop from "./assets/components/NavTop/NavTop";
 import AddingRoomPage from "./pages/addingRoom/AddingRoomPage";
 import RoomPage from "./pages/roomPage/RoomPage";
 import AddingTaskPage from "./pages/addingTasks/AddingTaskPage";
+import DailyListPage from "./pages/dailyList/DailyListPage";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/addRoom" element={<AddingRoomPage />} />
         <Route path="/:roomId" element={<RoomPage />} />
         <Route path="/addTask/:roomId" element={<AddingTaskPage />} />
+        <Route path="/dailyList" element={<DailyListPage />} />
       </Routes>
       <NavBottom />
     </>

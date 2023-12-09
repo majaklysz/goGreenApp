@@ -36,7 +36,7 @@ export default function NavBottom() {
           <p>Rooms</p>
         </NavLink>
         <NavLink
-          to="/daily"
+          to="/dailyList"
           className={`daily ${activeStates.daily ? "active" : ""}`}
           onClick={() => handleNavLinkClick("daily")}
         >
@@ -55,7 +55,7 @@ export default function NavBottom() {
             src={activeStates.eco ? activeEco : Eco}
             alt="eco recipes for cleaning detergents"
           />
-          <p>Recipes</p>
+          <p></p>
         </NavLink>
       </div>
     </nav>
