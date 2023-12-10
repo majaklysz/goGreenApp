@@ -68,6 +68,7 @@ export default function RoomPage() {
           <h2>{name}</h2>
         </div>
         <img
+          onClick={() => navigate(`/editRoom/${params.roomId}`)}
           className="settingsIcon"
           src="src/assets/icons/fi-rr-settings.svg"
           alt="settings"

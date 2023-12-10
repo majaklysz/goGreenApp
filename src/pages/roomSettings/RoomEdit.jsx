@@ -1,68 +1,58 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import "./roomEdit.css";
 
-export default function TaskEditPage() {
+export default function RoomEdit() {
   const params = useParams();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
-  const [task, setTask] = useState({});
-  const [name, setName] = useState("");
-  const [frequencyType, setFrequencyType] = useState("");
-  const [frequencyNumber, setFrequencyNumber] = useState(0);
+  const [room, setRoom] = useState({});
+  const [name, setName] = useState(room.room_name || "");
   const navigate = useNavigate();
   const url = `${
     import.meta.env.VITE_FIREBASE_DB_URL
-  }users/${userId}/userRooms/${params.roomId}/userTasks/${params.taskId}.json`;
+  }users/${userId}/userRooms/${params.roomId}.json`;
 
   useEffect(() => {
-    async function getTask() {
+    async function getRoom() {
       try {
         const response = await fetch(url);
         const data = await response.json();
 
-        if (
-          data &&
-          data.name !== undefined &&
-          data.frequencyNumber !== undefined &&
-          data.frequencyType !== undefined
-        ) {
-          setTask({
+        if (data && data.room_name) {
+          setRoom({
             ...data,
-            id: params.taskId,
+            id: params.roomId,
           });
 
-          setName(data.name);
-          setFrequencyNumber(data.frequencyNumber);
-          setFrequencyType(data.frequencyType);
+          setName(data.room_name);
         } else {
-          console.error("Task data or name is null or undefined");
+          console.error("Room data or room_name is null or undefined");
         }
       } catch (error) {
-        console.error("Error fetching task data:", error);
+        console.error("Error fetching room data:", error);
       }
     }
 
-    getTask();
-  }, [params.taskId, url]);
+    getRoom();
+  }, [params.roomId, url]);
 
-  console.log(task);
   async function handleSubmit(e) {
     e.preventDefault();
-    const taskToUpdate = {
-      ...task,
-      name: name,
-      frequencyNumber: frequencyNumber,
-      frequencyType: frequencyType,
-      id: task.id,
+    const roomToUpdate = {
+      ...room,
+      room_name: name,
+      id: room.id,
     };
+
     const response = await fetch(url, {
       method: "PUT",
-      body: JSON.stringify(taskToUpdate),
+      body: JSON.stringify(roomToUpdate),
     });
 
     if (response.ok) {
-      navigate(-1);
+      navigate(`/${room.id}`);
     } else {
       console.log("Something went wrong");
     }
@@ -77,15 +67,15 @@ export default function TaskEditPage() {
       });
 
       if (response.ok) {
-        navigate(-1);
+        navigate("/");
       } else {
         console.log("Something went wrong");
       }
     }
   }
   return (
-    <section>
-      <form onSubmit={handleSubmit}>
+    <section className="roomSettings">
+      <form onSubmit={handleSubmit} className="editForm">
         <div className="goBackArrowTasks" onClick={() => navigate(-1)}>
           <svg
             width="32"
@@ -99,36 +89,17 @@ export default function TaskEditPage() {
               fill="white"
             />
           </svg>
-          <h2>Edit Task</h2>
+
+          <h2>Room Setting</h2>
         </div>
-        <label>
-          <p>Task name:</p>
+        <label className="inputRoomEdit">
+          <p> Room Name:</p>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-        <label>Do every:</label>
-        <div className="inputBoxTask">
-          <label className="freqNumber">
-            <input
-              type="number"
-              min="1"
-              value={frequencyNumber}
-              onChange={(e) => setFrequencyNumber(e.target.value)}
-            />
-          </label>
-          <select
-            className="freqType"
-            value={frequencyType}
-            onChange={(e) => setFrequencyType(e.target.value)}
-          >
-            <option value="daily">Day</option>
-            <option value="weekly">Week</option>
-            <option value="monthly">Month</option>
-          </select>
-        </div>
         <button className="cta">Save</button>
       </form>
       <button onClick={handleDelete} className="deleteButton">

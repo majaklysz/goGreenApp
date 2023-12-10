@@ -32,7 +32,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-bottom: 24px;
 }
 
@@ -49,4 +49,26 @@
 .taskCard h3 {
   font-size: 1.5rem;
   margin: unset;
+}
+
+.notDoneTask button {
+  background-image: url("../../icons/fi-rr-check.svg");
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 40px;
+  background-position: center;
+  background-color: var(--background);
+  border: none;
+  padding: 16px;
+}
+
+.dueTodayTask button {
+  background-image: url("../../icons/fi-rr-checkBlac.svg");
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 40px;
+  background-position: center;
+  background-color: var(--green);
+  border: none;
+  padding: 24px;
 }

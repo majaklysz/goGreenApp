@@ -6,11 +6,11 @@ import "../addingTasks/addingTask.css";
 
 export default function AddingTaskPage() {
   const auth = getAuth();
+  const params = useParams();
   const navigate = useNavigate();
   const [task, setTask] = useState("");
   const [frequencyType, setFrequencyType] = useState("daily");
   const [frequencyNumber, setFrequencyNumber] = useState(1);
-  const params = useParams();
 
   const handleTaskChange = (event) => {
     setTask(event.target.value);

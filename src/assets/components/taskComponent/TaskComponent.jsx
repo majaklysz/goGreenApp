@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect, useCallback } from "react";
 import "../taskComponent/taskCard.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
 const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
@@ -12,6 +12,7 @@ export default function TaskComponent({ task }) {
   const params = useParams();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+  const navigate = useNavigate();
 
   const calculateDaysUntilDue = useCallback(() => {
     const currentDate = new Date();
@@ -56,7 +57,6 @@ export default function TaskComponent({ task }) {
       const updatedTaskData = {
         ...existingTaskData,
         dueDate: newDueDate.toISOString(),
-        isDone: true,
       };
 
       // Send a PUT request with the updated task data
@@ -107,7 +107,11 @@ export default function TaskComponent({ task }) {
   };
 
   return (
-    <div className={taskClasses} id="taskCard">
+    <div
+      className={taskClasses}
+      id="taskCard"
+      onClick={() => navigate(`/editTask/${task?.id}`)}
+    >
       <div>
         <h3>{task?.name}</h3>
         {dueInDays === 0 ? (
@@ -118,7 +122,7 @@ export default function TaskComponent({ task }) {
           </p>
         )}
       </div>
-      <button onClick={handleDoneButtonClick}>Done</button>
+      <button onClick={handleDoneButtonClick}></button>
     </div>
   );
 }

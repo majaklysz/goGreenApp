@@ -10,6 +10,8 @@ import AddingRoomPage from "./pages/addingRoom/AddingRoomPage";
 import RoomPage from "./pages/roomPage/RoomPage";
 import AddingTaskPage from "./pages/addingTasks/AddingTaskPage";
 import DailyListPage from "./pages/dailyList/DailyListPage";
+import RoomEdit from "./pages/roomSettings/RoomEdit";
+import TaskEditPage from "./pages/taskEdit/TaskEditPage";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
@@ -37,7 +39,9 @@ export default function App() {
         <Route path="/addRoom" element={<AddingRoomPage />} />
         <Route path="/:roomId" element={<RoomPage />} />
         <Route path="/addTask/:roomId" element={<AddingTaskPage />} />
+        <Route path="/editRoom/:roomId" element={<RoomEdit />} />
         <Route path="/dailyList" element={<DailyListPage />} />
+        <Route path="/editTask/:taskId" element={<TaskEditPage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <NavBottom />

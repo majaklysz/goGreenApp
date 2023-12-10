@@ -1,0 +1,16 @@
+.lilTag {
+  border: 1px solid var(--green);
+  padding: 8px 16px;
+  border-radius: 10px;
+  width: fit-content;
+  font-size: 1rem;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.dailyCompCardBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 24px;
+}

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import TaskComponent from "../taskComponent/TaskComponent";
-
+import "./dailycomp.css";
 export default function DailyListCom({ user }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -59,18 +59,16 @@ export default function DailyListCom({ user }) {
 
   return (
     <div>
-      <h2>User Tasks</h2>
       {loading && <p>Loading...</p>}
       {error && <p style={{ color: "red" }}>{error}</p>}
       {tasks.length === 0 && !loading && <p>No tasks due today.</p>}
-      <ul>
-        {tasks.map((task) => (
-          <>
-            <p className="lilTag">{task.roomName}</p>
-            <TaskComponent task={task} key={task.name} />
-          </>
-        ))}
-      </ul>
+
+      {tasks.map((task) => (
+        <div key={task.name} className="dailyCompCardBox">
+          <p className="lilTag">{task.roomName}</p>
+          <TaskComponent task={task} />
+        </div>
+      ))}
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function Home() {
           alt="Add plus"
         />
       </div>
-      <div className="roomsContent">
+      <div className="roomsContent contentScrollable">
         {userRooms.length > 0 ? (
           userRooms.map((room) => (
             <div
