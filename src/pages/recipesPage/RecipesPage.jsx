@@ -3,6 +3,7 @@ import "./Recipes.css";
 import { useNavigate } from "react-router-dom";
 export default function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
     async function getRecipes() {
@@ -17,6 +18,15 @@ export default function RecipesPage() {
     }
     getRecipes();
   }, []);
+
+  let recipesToDisplay = [...recipes];
+
+  if (searchValue) {
+    // eslint-disable-next-line no-unused-vars
+    recipesToDisplay = recipesToDisplay.filter((recipe) =>
+      recipe.name.toLowerCase().includes(searchValue)
+    );
+  }
   return (
     <section>
       <h1 className="headingEco">Green Supplies</h1>
@@ -24,8 +34,16 @@ export default function RecipesPage() {
         Discover easy, eco-friendly recipes for homemade cleaning supplies!
         Healthier approach to keeping your space clean!
       </p>
+      <div className="searchBox">
+        <input
+          className="search"
+          type="search"
+          placeholder="🔍 Search"
+          onChange={(e) => setSearchValue(e.target.value.toLowerCase())}
+        />
+      </div>
       <div className="scrollableBox">
-        {recipes.map((recipe) => (
+        {recipesToDisplay.map((recipe) => (
           <div
             key={recipe.id}
             className="recipeCard"

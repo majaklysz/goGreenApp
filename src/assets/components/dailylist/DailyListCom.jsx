@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import TaskComponent from "../taskComponent/TaskComponent";
 import "./dailycomp.css";
+import { useNavigate } from "react-router-dom";
 export default function DailyListCom({ user }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,7 +45,11 @@ export default function DailyListCom({ user }) {
           []
         );
 
-        setTasks(allTasks);
+        const tasksDueToday = allTasks.filter((task) => {
+          return task.dueDate.split("T")[0] === today;
+        });
+
+        setTasks(tasksDueToday);
         setError(null);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -66,7 +72,9 @@ export default function DailyListCom({ user }) {
 
       {tasks.map((task) => (
         <div key={task.name} className="dailyCompCardBox">
-          <p className="lilTag">{task.roomName}</p>
+          <p className="lilTag" onClick={() => navigate(`/${task.roomId}`)}>
+            {task.roomName}
+          </p>
           <TaskComponent task={task} />
         </div>
       ))}
