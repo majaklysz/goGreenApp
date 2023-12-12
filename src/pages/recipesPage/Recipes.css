@@ -1,0 +1,35 @@
+.scrollableBox {
+  overflow: scroll;
+  height: 56vh;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.recipeCard {
+  color: var(--green);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--green);
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+}
+
+.headingEco {
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-top: 36px;
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+}
+
+.paraEco {
+  margin-left: 24px;
+  margin-right: 24px;
+  margin-bottom: 32px;
+  font-size: 1.2rem;
+  margin-top: 0px;
+}

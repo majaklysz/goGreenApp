@@ -34,6 +34,7 @@ export default function DailyListCom({ user }) {
             const tasksWithRoomName = roomTasks.map((task) => ({
               ...task,
               roomName: room.room_name,
+              roomId: room.id,
             }));
 
             acc.push(...tasksWithRoomName);

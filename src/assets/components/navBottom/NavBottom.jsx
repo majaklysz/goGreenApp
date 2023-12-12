@@ -28,12 +28,12 @@ export default function NavBottom() {
           />
           <p>Daily List</p>
         </NavLink>
-        <NavLink to="/eco">
+        <NavLink to="/recipes">
           <img
-            src={location.pathname === "/eco" ? activeEco : Eco}
+            src={location.pathname === "/recipes" ? activeEco : Eco}
             alt="Eco Recipes for Cleaning Detergents"
           />
-          <p>Recipes</p>
+          <p>Supplies</p>
         </NavLink>
       </div>
     </nav>
