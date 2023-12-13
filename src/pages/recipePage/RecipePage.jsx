@@ -4,8 +4,10 @@ import NotSaved from "../../assets/icons/fi-rr-bookmark.svg";
 import Saved from "../../assets/icons/bookMark.svg";
 import "./recipe.css";
 import arrowBack from "../../assets/icons/fi-rr-angle-small-left.svg";
+
 export default function RecipePage() {
   const [recipe, setRecipe] = useState({
+    id: "",
     name: "",
     benefits: "",
     ingredients: [],
@@ -13,81 +15,62 @@ export default function RecipePage() {
     note: "",
   });
 
-  // State variables for bookmarking
-  const [isSaved, setIsSaved] = useState(false);
-
-  const [name, setName] = useState("");
-  const [benefits, setBenefits] = useState("");
-  const [ingredients, setIngredients] = useState([]);
-  const [instructions, setInstructions] = useState([]);
-  const [note, setNote] = useState("");
-
-  const params = useParams();
+  const { recipeId } = useParams();
   const navigate = useNavigate();
-  const url = `${import.meta.env.VITE_FIREBASE_DB_URL}recipes/${
-    params.recipeId
-  }.json`;
+  const url = `${import.meta.env.VITE_FIREBASE_DB_URL}recipes/${recipeId}.json`;
 
   useEffect(() => {
     async function getRecipe() {
       const response = await fetch(url);
       const data = await response.json();
-      setRecipe(data);
 
       if (data) {
-        setName(data.name || "");
-        setBenefits(data.benefits || "");
-        setIngredients(data.ingredients || []);
-        setInstructions(data.instructions || []);
-        setNote(data.note || "");
+        setRecipe(data);
+        localStorage.setItem(
+          `saved_${recipeId}`,
+          localStorage.getItem(`saved_${recipeId}`) || "false"
+        );
       }
     }
     getRecipe();
-  }, [url]);
+  }, [url, recipeId]);
 
-  // Toggle save state and save in user's history
-  const handleSaveClick = () => {
-    setIsSaved(!isSaved);
-
-    // Save information in user's history (you can use localStorage, sessionStorage, or any other storage solution)
-    const savedRecipes = JSON.parse(localStorage.getItem("savedRecipes")) || [];
-    const recipeId = params.recipeId;
-
-    if (isSaved) {
-      // Remove from saved recipes
-      const updatedRecipes = savedRecipes.filter((id) => id !== recipeId);
-      localStorage.setItem("savedRecipes", JSON.stringify(updatedRecipes));
-    } else {
-      // Add to saved recipes
-      localStorage.setItem(
-        "savedRecipes",
-        JSON.stringify([...savedRecipes, recipeId])
-      );
-    }
+  const localStorageKey = `saved_${recipeId}`;
+  const [isSaved, setIsSaved] = useState(
+    localStorage.getItem(localStorageKey) === "true"
+  );
+  const toggleSaved = () => {
+    const newSavedState = !isSaved;
+    setIsSaved(newSavedState);
+    localStorage.setItem(`saved_${recipe.id}`, newSavedState.toString());
   };
 
+  useEffect(() => {
+    // This effect runs when the component mounts.
+    // It retrieves the liked state from localStorage and sets the initial state.
+    setIsSaved(localStorage.getItem(localStorageKey) === "true");
+  }, [localStorageKey]);
+
+  const bookMark = isSaved ? Saved : NotSaved;
+
   return (
-    <div key={recipe}>
+    <div key={recipe.id}>
       <div className="headlineRecipe">
         <div className="arrowBackRecipes" onClick={() => navigate("/recipes")}>
           <img className="arrowBack" src={arrowBack} alt="go back arrow" />
-          <h1>{name}</h1>
+          <h1>{recipe.name}</h1>
         </div>
-        <img
-          src={isSaved ? Saved : NotSaved}
-          alt=""
-          onClick={handleSaveClick}
-        />
+        <img src={bookMark} alt="" onClick={toggleSaved} />
       </div>
       <div className="recipeContent">
         <div className="benefits">
           <h2>Benefits</h2>
-          <p>{benefits}</p>
+          <p>{recipe.benefits}</p>
         </div>
         <div className="ingredients">
           <h2>Ingredients</h2>
           <ul>
-            {ingredients.map((ingredient, index) => (
+            {recipe.ingredients.map((ingredient, index) => (
               <li key={index}>
                 <span className="greenH">{ingredient.name}</span> -{" "}
                 {ingredient.purpose}
@@ -97,18 +80,18 @@ export default function RecipePage() {
           </ul>
         </div>
         <div className="instructions">
-          <h2>Step-by-Step Instuctions</h2>
+          <h2>Step-by-Step Instructions</h2>
           <ol>
-            {instructions.map((instruction, index) => (
+            {recipe.instructions.map((instruction, index) => (
               <li key={index}>
-                <h3>{instruction.step}:</h3> <p> {instruction.description}</p>
+                <h3>{instruction.step}:</h3> <p>{instruction.description}</p>
               </li>
             ))}
           </ol>
         </div>
         <div className="note">
           <h2>Note</h2>
-          <p>{note}</p>
+          <p>{recipe.note}</p>
         </div>
       </div>
     </div>

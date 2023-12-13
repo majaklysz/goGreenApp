@@ -14,6 +14,7 @@ import RoomEdit from "./pages/roomSettings/RoomEdit";
 import TaskEditPage from "./pages/taskEdit/TaskEditPage";
 import RecipesPage from "./pages/recipesPage/RecipesPage";
 import RecipePage from "./pages/recipePage/RecipePage";
+import ProfilePage from "./pages/progilepage/ProfilePage";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
@@ -46,6 +47,7 @@ export default function App() {
         <Route path="/editTask/:taskId" element={<TaskEditPage />} />
         <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/:recipeId" element={<RecipePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <NavBottom />

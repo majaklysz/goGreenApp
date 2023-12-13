@@ -35,9 +35,10 @@ export default function SignupPage() {
   }
   async function createUser(uid, mail) {
     const url = `${import.meta.env.VITE_FIREBASE_DB_URL}/users/${uid}.json`;
+    const points = 0; // Default points value
     const response = await fetch(url, {
       method: "PUT",
-      body: JSON.stringify({ name, mail }),
+      body: JSON.stringify({ name, mail, points }),
     });
     if (response.ok) {
       const data = await response.json();
