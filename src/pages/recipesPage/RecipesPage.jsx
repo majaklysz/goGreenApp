@@ -47,7 +47,10 @@ export default function RecipesPage() {
           <div
             key={recipe.id}
             className="recipeCard"
-            onClick={() => navigate(`/${recipe.id}`)}
+            onClick={() => {
+              console.log("Recipe ID:", recipe.id);
+              navigate(`/recipes/${recipe.id}`);
+            }}
           >
             <p>{recipe.name}</p>
             <img src="src/assets/icons/arrowsmallrightGreen.svg" alt="arrow" />
