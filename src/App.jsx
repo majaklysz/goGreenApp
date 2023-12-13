@@ -45,7 +45,7 @@ export default function App() {
         <Route path="/dailyList" element={<DailyListPage />} />
         <Route path="/editTask/:taskId" element={<TaskEditPage />} />
         <Route path="/recipes" element={<RecipesPage />} />
-        <Route path="/:recipeId" element={<RecipePage />} />
+        <Route path="/recipes/:recipeId" element={<RecipePage />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
       <NavBottom />
