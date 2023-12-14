@@ -67,6 +67,25 @@ export default function TaskComponent({ task }) {
         body: JSON.stringify(updatedTaskData),
       });
 
+      // Update user points
+      const userUrl = `${
+        import.meta.env.VITE_FIREBASE_DB_URL
+      }users/${userId}.json`;
+      const userResponse = await fetch(userUrl);
+      const userData = await userResponse.json();
+
+      // Increment points by 10
+      const updatedPoints = (userData.points || 0) + 5;
+
+      // Send a PUT request to update user points
+      await fetch(userUrl, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...userData, points: updatedPoints }),
+      });
+
       // Handle success, e.g., show a success message or update state
       console.log("Task status updated successfully");
     } catch (error) {

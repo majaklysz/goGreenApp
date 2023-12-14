@@ -14,3 +14,16 @@
   justify-content: center;
   margin-left: 24px;
 }
+
+.placeholderDaily {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 33% auto;
+}
+
+.placeholderDaily p {
+  text-align: center;
+}

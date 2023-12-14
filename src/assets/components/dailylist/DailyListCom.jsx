@@ -2,12 +2,12 @@
 import { useEffect, useState } from "react";
 import TaskComponent from "../taskComponent/TaskComponent";
 import "./dailycomp.css";
-import { useNavigate } from "react-router-dom";
+import smilyFaceIcon from "../../icons/fi-rr-smile.svg";
+
 export default function DailyListCom({ user }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,15 +66,25 @@ export default function DailyListCom({ user }) {
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {loading && (
+        <div className="placeholderDaily">
+          <img src={smilyFaceIcon} alt="smily face" />
+          <p>Loading tasks...</p>
+        </div>
+      )}
       {error && <p style={{ color: "red" }}>{error}</p>}
-      {tasks.length === 0 && !loading && <p>No tasks due today.</p>}
+      {tasks.length === 0 && !loading && (
+        <div className="placeholderDaily">
+          <img src={smilyFaceIcon} alt="smily face" />
+          <p>
+            No task left for today. <br /> Sit down and relax
+          </p>
+        </div>
+      )}
 
       {tasks.map((task) => (
         <div key={task.name} className="dailyCompCardBox">
-          <p className="lilTag" onClick={() => navigate(`/${task.roomId}`)}>
-            {task.roomName}
-          </p>
+          <p className="lilTag">{task.roomName}</p>
           <TaskComponent task={task} />
         </div>
       ))}
