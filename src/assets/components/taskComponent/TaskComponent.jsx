@@ -14,6 +14,26 @@ export default function TaskComponent({ task }) {
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
 
+  const calculateNewDueDate = (type, number) => {
+    const currentDate = new Date();
+    currentDate.setUTCHours(0, 0, 0, 0);
+
+    const dueDateTime = new Date(dueDate);
+    dueDateTime.setUTCHours(0, 0, 0, 0);
+
+    let timeDifference =
+      number *
+      MILLISECONDS_IN_DAY *
+      {
+        daily: 1,
+        weekly: 7,
+        monthly: 30,
+      }[type];
+
+    const newDueDate = new Date(currentDate.getTime() + timeDifference);
+    return newDueDate;
+  };
+
   const calculateDaysUntilDue = useCallback(() => {
     const currentDate = new Date();
     currentDate.setUTCHours(0, 0, 0, 0);
@@ -41,7 +61,7 @@ export default function TaskComponent({ task }) {
     setIsDone(true);
 
     // Calculate the new dueDate based on frequency
-    const newDueDate = calculateNewDueDate();
+    const newDueDate = calculateNewDueDate(frequencyType, frequencyNumber);
 
     // Assuming you have an API endpoint to update the task status
     try {
@@ -97,40 +117,23 @@ export default function TaskComponent({ task }) {
 
   useEffect(() => {
     setDueInDays(calculateDaysUntilDue());
-  }, [task, calculateDaysUntilDue, isDone]);
+  }, [task, calculateDaysUntilDue, isDone, frequencyType, frequencyNumber]);
 
   const taskClasses = [
     "notDoneTask",
     dueInDays === 0 ? "dueTodayTask" : "",
   ].join(" ");
 
-  // Function to calculate the new dueDate based on frequency
-  const calculateNewDueDate = () => {
-    const currentDate = new Date();
-    currentDate.setUTCHours(0, 0, 0, 0);
-
-    const dueDateTime = new Date(dueDate);
-    dueDateTime.setUTCHours(0, 0, 0, 0);
-
-    let timeDifference =
-      frequencyNumber *
-      MILLISECONDS_IN_DAY *
-      {
-        daily: 1,
-        weekly: 7,
-        monthly: 30,
-      }[frequencyType];
-
-    const newDueDate = new Date(currentDate.getTime() + timeDifference);
-    return newDueDate;
-  };
-
   return (
     <div className={taskClasses} id="taskCard">
       <div className="taskInfo">
         <div
           className="editTask"
-          onClick={() => navigate(`/editTask/${task.id}`)}
+          onClick={() =>
+            navigate(`/editTask/${task.id}`, {
+              state: { roomId: params.roomId },
+            })
+          }
         >
           <p>.</p>
           <p>.</p>

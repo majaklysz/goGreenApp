@@ -1,20 +1,23 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 export default function TaskEditPage() {
   const params = useParams();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
-  const [task, setTask] = useState(null); // Set initial state to null
+  const [task, setTask] = useState(null);
   const [name, setName] = useState("");
   const [frequencyType, setFrequencyType] = useState("");
   const [frequencyNumber, setFrequencyNumber] = useState(0);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+  const roomId = location.state.roomId;
   const url = `${
     import.meta.env.VITE_FIREBASE_DB_URL
-  }users/${userId}/userRooms/${params.roomId}/userTasks/${params.taskId}.json`;
+  }users/${userId}/userRooms/${roomId}/userTasks/${params.taskId}.json`;
+  const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
   useEffect(() => {
     async function getTask() {
@@ -22,10 +25,10 @@ export default function TaskEditPage() {
         const response = await fetch(url);
         const data = await response.json();
         setTask(data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching task:", error);
-        setLoading(false); // Set loading to false in case of an error
+        setLoading(false);
       }
     }
 
@@ -33,13 +36,35 @@ export default function TaskEditPage() {
   }, [params?.taskId, url]);
 
   useEffect(() => {
-    // Check if task data is available before updating state
     if (task && Object.keys(task).length > 0) {
       setName(task?.name || "");
       setFrequencyType(task?.frequencyType || "");
       setFrequencyNumber(task?.frequencyNumber || 0);
     }
   }, [task]);
+
+  const handleFrequencyChange = () => {
+    // Calculate new due date when frequency changes
+    const currentDate = new Date();
+    currentDate.setUTCHours(0, 0, 0, 0);
+
+    let timeDifference =
+      frequencyNumber *
+      MILLISECONDS_IN_DAY *
+      {
+        daily: 1,
+        weekly: 7,
+        monthly: 30,
+      }[frequencyType];
+
+    const newDueDate = new Date(currentDate.getTime() + timeDifference);
+
+    // Update due date in the task state
+    setTask((prevTask) => ({
+      ...prevTask,
+      dueDate: newDueDate.toISOString(),
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +112,6 @@ export default function TaskEditPage() {
     }
   };
 
-  // Check if task data is not available yet or loading
   if (loading || !task || Object.keys(task).length === 0) {
     return <p>Loading...</p>;
   }
@@ -125,13 +149,19 @@ export default function TaskEditPage() {
               type="number"
               min="1"
               value={frequencyNumber}
-              onChange={(e) => setFrequencyNumber(e.target.value)}
+              onChange={(e) => {
+                setFrequencyNumber(e.target.value);
+                handleFrequencyChange();
+              }}
             />
           </label>
           <select
             className="freqType"
             value={frequencyType}
-            onChange={(e) => setFrequencyType(e.target.value)}
+            onChange={(e) => {
+              setFrequencyType(e.target.value);
+              handleFrequencyChange();
+            }}
           >
             <option value="daily">Day</option>
             <option value="weekly">Week</option>
