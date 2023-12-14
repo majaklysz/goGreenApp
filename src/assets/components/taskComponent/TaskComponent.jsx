@@ -2,16 +2,37 @@
 import { useState, useEffect, useCallback } from "react";
 import "../taskComponent/taskCard.css";
 import { getAuth } from "firebase/auth";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
 export default function TaskComponent({ task }) {
+  const navigate = useNavigate();
   const [isDone, setIsDone] = useState(false);
   const { dueDate, frequencyType, frequencyNumber } = task || {};
   const params = useParams();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
+
+  const calculateNewDueDate = (type, number) => {
+    const currentDate = new Date();
+    currentDate.setUTCHours(0, 0, 0, 0);
+
+    const dueDateTime = new Date(dueDate);
+    dueDateTime.setUTCHours(0, 0, 0, 0);
+
+    let timeDifference =
+      number *
+      MILLISECONDS_IN_DAY *
+      {
+        daily: 1,
+        weekly: 7,
+        monthly: 30,
+      }[type];
+
+    const newDueDate = new Date(currentDate.getTime() + timeDifference);
+    return newDueDate;
+  };
 
   const calculateDaysUntilDue = useCallback(() => {
     const currentDate = new Date();
@@ -40,7 +61,7 @@ export default function TaskComponent({ task }) {
     setIsDone(true);
 
     // Calculate the new dueDate based on frequency
-    const newDueDate = calculateNewDueDate();
+    const newDueDate = calculateNewDueDate(frequencyType, frequencyNumber);
 
     // Assuming you have an API endpoint to update the task status
     try {
@@ -96,45 +117,38 @@ export default function TaskComponent({ task }) {
 
   useEffect(() => {
     setDueInDays(calculateDaysUntilDue());
-  }, [task, calculateDaysUntilDue, isDone]);
+  }, [task, calculateDaysUntilDue, isDone, frequencyType, frequencyNumber]);
 
   const taskClasses = [
     "notDoneTask",
     dueInDays === 0 ? "dueTodayTask" : "",
   ].join(" ");
 
-  // Function to calculate the new dueDate based on frequency
-  const calculateNewDueDate = () => {
-    const currentDate = new Date();
-    currentDate.setUTCHours(0, 0, 0, 0);
-
-    const dueDateTime = new Date(dueDate);
-    dueDateTime.setUTCHours(0, 0, 0, 0);
-
-    let timeDifference =
-      frequencyNumber *
-      MILLISECONDS_IN_DAY *
-      {
-        daily: 1,
-        weekly: 7,
-        monthly: 30,
-      }[frequencyType];
-
-    const newDueDate = new Date(currentDate.getTime() + timeDifference);
-    return newDueDate;
-  };
-
   return (
     <div className={taskClasses} id="taskCard">
-      <div>
-        <h3>{task?.name}</h3>
-        {dueInDays === 0 ? (
-          <p>Due today</p>
-        ) : (
-          <p>
-            Due in {dueInDays} {dueInDays === 1 ? "day" : "days"}
-          </p>
-        )}
+      <div className="taskInfo">
+        <div
+          className="editTask"
+          onClick={() =>
+            navigate(`/editTask/${task.id}`, {
+              state: { roomId: params.roomId },
+            })
+          }
+        >
+          <p>.</p>
+          <p>.</p>
+          <p>.</p>
+        </div>
+        <div>
+          <h3>{task?.name}</h3>
+          {dueInDays === 0 ? (
+            <p>Due today</p>
+          ) : (
+            <p>
+              Due in {dueInDays} {dueInDays === 1 ? "day" : "days"}
+            </p>
+          )}
+        </div>
       </div>
       <button onClick={handleDoneButtonClick}></button>
     </div>

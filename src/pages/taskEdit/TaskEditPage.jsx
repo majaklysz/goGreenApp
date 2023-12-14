@@ -1,53 +1,72 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 
 export default function TaskEditPage() {
   const params = useParams();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
-  const [task, setTask] = useState({});
+  const [task, setTask] = useState(null);
   const [name, setName] = useState("");
   const [frequencyType, setFrequencyType] = useState("");
   const [frequencyNumber, setFrequencyNumber] = useState(0);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const location = useLocation();
+  const roomId = location.state.roomId;
   const url = `${
     import.meta.env.VITE_FIREBASE_DB_URL
-  }users/${userId}/userRooms/${params.roomId}/userTasks/${params.taskId}.json`;
+  }users/${userId}/userRooms/${roomId}/userTasks/${params.taskId}.json`;
+  const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
   useEffect(() => {
     async function getTask() {
       try {
         const response = await fetch(url);
         const data = await response.json();
-
-        if (
-          data &&
-          data.name !== undefined &&
-          data.frequencyNumber !== undefined &&
-          data.frequencyType !== undefined
-        ) {
-          setTask({
-            ...data,
-            id: params.taskId,
-          });
-
-          setName(data.name);
-          setFrequencyNumber(data.frequencyNumber);
-          setFrequencyType(data.frequencyType);
-        } else {
-          console.error("Task data or name is null or undefined");
-        }
+        setTask(data);
+        setLoading(false);
       } catch (error) {
-        console.error("Error fetching task data:", error);
+        console.error("Error fetching task:", error);
+        setLoading(false);
       }
     }
 
     getTask();
-  }, [params.taskId, url]);
+  }, [params?.taskId, url]);
 
-  console.log(task);
-  async function handleSubmit(e) {
+  useEffect(() => {
+    if (task && Object.keys(task).length > 0) {
+      setName(task?.name || "");
+      setFrequencyType(task?.frequencyType || "");
+      setFrequencyNumber(task?.frequencyNumber || 0);
+    }
+  }, [task]);
+
+  const handleFrequencyChange = () => {
+    // Calculate new due date when frequency changes
+    const currentDate = new Date();
+    currentDate.setUTCHours(0, 0, 0, 0);
+
+    let timeDifference =
+      frequencyNumber *
+      MILLISECONDS_IN_DAY *
+      {
+        daily: 1,
+        weekly: 7,
+        monthly: 30,
+      }[frequencyType];
+
+    const newDueDate = new Date(currentDate.getTime() + timeDifference);
+
+    // Update due date in the task state
+    setTask((prevTask) => ({
+      ...prevTask,
+      dueDate: newDueDate.toISOString(),
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const taskToUpdate = {
       ...task,
@@ -56,24 +75,11 @@ export default function TaskEditPage() {
       frequencyType: frequencyType,
       id: task.id,
     };
-    const response = await fetch(url, {
-      method: "PUT",
-      body: JSON.stringify(taskToUpdate),
-    });
 
-    if (response.ok) {
-      navigate(-1);
-    } else {
-      console.log("Something went wrong");
-    }
-  }
-
-  async function handleDelete() {
-    const wantToDelete = confirm("Are you sure you want to delete?");
-
-    if (wantToDelete) {
+    try {
       const response = await fetch(url, {
-        method: "DELETE",
+        method: "PUT",
+        body: JSON.stringify(taskToUpdate),
       });
 
       if (response.ok) {
@@ -81,8 +87,35 @@ export default function TaskEditPage() {
       } else {
         console.log("Something went wrong");
       }
+    } catch (error) {
+      console.error("Error updating task:", error);
     }
+  };
+
+  const handleDelete = async () => {
+    const wantToDelete = window.confirm("Are you sure you want to delete?");
+
+    if (wantToDelete) {
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          navigate(-1);
+        } else {
+          console.log("Something went wrong");
+        }
+      } catch (error) {
+        console.error("Error deleting task:", error);
+      }
+    }
+  };
+
+  if (loading || !task || Object.keys(task).length === 0) {
+    return <p>Loading...</p>;
   }
+
   return (
     <section>
       <form onSubmit={handleSubmit}>
@@ -116,13 +149,19 @@ export default function TaskEditPage() {
               type="number"
               min="1"
               value={frequencyNumber}
-              onChange={(e) => setFrequencyNumber(e.target.value)}
+              onChange={(e) => {
+                setFrequencyNumber(e.target.value);
+                handleFrequencyChange();
+              }}
             />
           </label>
           <select
             className="freqType"
             value={frequencyType}
-            onChange={(e) => setFrequencyType(e.target.value)}
+            onChange={(e) => {
+              setFrequencyType(e.target.value);
+              handleFrequencyChange();
+            }}
           >
             <option value="daily">Day</option>
             <option value="weekly">Week</option>
