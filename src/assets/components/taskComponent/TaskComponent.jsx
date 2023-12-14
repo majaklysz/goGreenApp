@@ -75,7 +75,7 @@ export default function TaskComponent({ task }) {
       const userData = await userResponse.json();
 
       // Increment points by 10
-      const updatedPoints = (userData.points || 0) + 10;
+      const updatedPoints = (userData.points || 0) + 5;
 
       // Send a PUT request to update user points
       await fetch(userUrl, {

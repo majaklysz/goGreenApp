@@ -30,6 +30,27 @@ export default function NavTop() {
     getUser();
   }, [url, currentUser]);
 
+  const [serce, setSerce] = useState("");
+
+  useEffect(() => {
+    function settingPointHeart() {
+      if (0 < points <= 100) {
+        setSerce("💛");
+      } else if (100 < points <= 200) {
+        setSerce("💚");
+      } else if (200 < points <= 300) {
+        setSerce("💙");
+      } else if (300 < points <= 400) {
+        setSerce("💜");
+      } else if (400 < points <= 500) {
+        setSerce("🧡");
+      } else {
+        setSerce("💖");
+      }
+    }
+    settingPointHeart();
+  }, [points]);
+
   return (
     <nav className="navtop">
       <img
@@ -39,7 +60,9 @@ export default function NavTop() {
         alt=""
       />
       <div className="user" onClick={() => navigate("/profile")}>
-        <div className="streak"> {points} pt</div>
+        <div className="streak">
+          {serce} {points} pt
+        </div>
         <div>
           <img
             className="userPic"

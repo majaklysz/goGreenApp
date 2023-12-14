@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Recipes.css";
 import { useNavigate } from "react-router-dom";
+import smallGreenArrow from "../../assets/icons/arrowsmallrightGreen.svg";
 export default function RecipesPage() {
   const [recipes, setRecipes] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -48,12 +49,11 @@ export default function RecipesPage() {
             key={recipe.id}
             className="recipeCard"
             onClick={() => {
-              console.log("Recipe ID:", recipe.id);
               navigate(`/recipes/${recipe.id}`);
             }}
           >
             <p>{recipe.name}</p>
-            <img src="src/assets/icons/arrowsmallrightGreen.svg" alt="arrow" />
+            <img src={smallGreenArrow} alt="arrow" />
           </div>
         ))}
       </div>

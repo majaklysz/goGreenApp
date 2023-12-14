@@ -14,7 +14,7 @@ import RoomEdit from "./pages/roomSettings/RoomEdit";
 import TaskEditPage from "./pages/taskEdit/TaskEditPage";
 import RecipesPage from "./pages/recipesPage/RecipesPage";
 import RecipePage from "./pages/recipePage/RecipePage";
-import ProfilePage from "./pages/progilepage/ProfilePage";
+import ProfilePage from "./pages/profilepage/ProfilePage";
 
 export default function App() {
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
