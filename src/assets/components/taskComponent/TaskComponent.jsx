@@ -2,11 +2,12 @@
 import { useState, useEffect, useCallback } from "react";
 import "../taskComponent/taskCard.css";
 import { getAuth } from "firebase/auth";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
 export default function TaskComponent({ task }) {
+  const navigate = useNavigate();
   const [isDone, setIsDone] = useState(false);
   const { dueDate, frequencyType, frequencyNumber } = task || {};
   const params = useParams();
@@ -126,15 +127,25 @@ export default function TaskComponent({ task }) {
 
   return (
     <div className={taskClasses} id="taskCard">
-      <div>
-        <h3>{task?.name}</h3>
-        {dueInDays === 0 ? (
-          <p>Due today</p>
-        ) : (
-          <p>
-            Due in {dueInDays} {dueInDays === 1 ? "day" : "days"}
-          </p>
-        )}
+      <div className="taskInfo">
+        <div
+          className="editTask"
+          onClick={() => navigate(`/editTask/${task.id}`)}
+        >
+          <p>.</p>
+          <p>.</p>
+          <p>.</p>
+        </div>
+        <div>
+          <h3>{task?.name}</h3>
+          {dueInDays === 0 ? (
+            <p>Due today</p>
+          ) : (
+            <p>
+              Due in {dueInDays} {dueInDays === 1 ? "day" : "days"}
+            </p>
+          )}
+        </div>
       </div>
       <button onClick={handleDoneButtonClick}></button>
     </div>

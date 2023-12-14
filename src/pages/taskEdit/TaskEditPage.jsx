@@ -6,10 +6,11 @@ export default function TaskEditPage() {
   const params = useParams();
   const auth = getAuth();
   const userId = auth.currentUser ? auth.currentUser.uid : null;
-  const [task, setTask] = useState({});
+  const [task, setTask] = useState(null); // Set initial state to null
   const [name, setName] = useState("");
   const [frequencyType, setFrequencyType] = useState("");
   const [frequencyNumber, setFrequencyNumber] = useState(0);
+  const [loading, setLoading] = useState(true); // Add loading state
   const navigate = useNavigate();
   const url = `${
     import.meta.env.VITE_FIREBASE_DB_URL
@@ -20,34 +21,27 @@ export default function TaskEditPage() {
       try {
         const response = await fetch(url);
         const data = await response.json();
-
-        if (
-          data &&
-          data.name !== undefined &&
-          data.frequencyNumber !== undefined &&
-          data.frequencyType !== undefined
-        ) {
-          setTask({
-            ...data,
-            id: params.taskId,
-          });
-
-          setName(data.name);
-          setFrequencyNumber(data.frequencyNumber);
-          setFrequencyType(data.frequencyType);
-        } else {
-          console.error("Task data or name is null or undefined");
-        }
+        setTask(data);
+        setLoading(false); // Set loading to false when data is fetched
       } catch (error) {
-        console.error("Error fetching task data:", error);
+        console.error("Error fetching task:", error);
+        setLoading(false); // Set loading to false in case of an error
       }
     }
 
     getTask();
-  }, [params.taskId, url]);
+  }, [params?.taskId, url]);
 
-  console.log(task);
-  async function handleSubmit(e) {
+  useEffect(() => {
+    // Check if task data is available before updating state
+    if (task && Object.keys(task).length > 0) {
+      setName(task?.name || "");
+      setFrequencyType(task?.frequencyType || "");
+      setFrequencyNumber(task?.frequencyNumber || 0);
+    }
+  }, [task]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const taskToUpdate = {
       ...task,
@@ -56,24 +50,11 @@ export default function TaskEditPage() {
       frequencyType: frequencyType,
       id: task.id,
     };
-    const response = await fetch(url, {
-      method: "PUT",
-      body: JSON.stringify(taskToUpdate),
-    });
 
-    if (response.ok) {
-      navigate(-1);
-    } else {
-      console.log("Something went wrong");
-    }
-  }
-
-  async function handleDelete() {
-    const wantToDelete = confirm("Are you sure you want to delete?");
-
-    if (wantToDelete) {
+    try {
       const response = await fetch(url, {
-        method: "DELETE",
+        method: "PUT",
+        body: JSON.stringify(taskToUpdate),
       });
 
       if (response.ok) {
@@ -81,8 +62,36 @@ export default function TaskEditPage() {
       } else {
         console.log("Something went wrong");
       }
+    } catch (error) {
+      console.error("Error updating task:", error);
     }
+  };
+
+  const handleDelete = async () => {
+    const wantToDelete = window.confirm("Are you sure you want to delete?");
+
+    if (wantToDelete) {
+      try {
+        const response = await fetch(url, {
+          method: "DELETE",
+        });
+
+        if (response.ok) {
+          navigate(-1);
+        } else {
+          console.log("Something went wrong");
+        }
+      } catch (error) {
+        console.error("Error deleting task:", error);
+      }
+    }
+  };
+
+  // Check if task data is not available yet or loading
+  if (loading || !task || Object.keys(task).length === 0) {
+    return <p>Loading...</p>;
   }
+
   return (
     <section>
       <form onSubmit={handleSubmit}>
