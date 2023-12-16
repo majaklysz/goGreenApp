@@ -1,7 +1,7 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import "./TaskEdit.css";
 export default function TaskEditPage() {
   const params = useParams();
   const auth = getAuth();
@@ -116,9 +116,9 @@ export default function TaskEditPage() {
   }
 
   return (
-    <section>
+    <section className="contentTaskAdd">
       <form onSubmit={handleSubmit}>
-        <div className="goBackArrowTasks" onClick={() => navigate(-1)}>
+        <div className="goBackArrowEdit" onClick={() => navigate(-1)}>
           <svg
             width="32"
             height="33"
@@ -133,39 +133,42 @@ export default function TaskEditPage() {
           </svg>
           <h2>Edit Task</h2>
         </div>
-        <label>
+        <label className="editNameBox">
           <p>Task name:</p>
           <input
+            className="editTaskName"
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </label>
-        <label>Do every:</label>
-        <div className="inputBoxTask">
-          <label className="freqNumber">
-            <input
-              type="number"
-              min="1"
-              value={frequencyNumber}
+        <div className="editBox">
+          <p>Do every:</p>
+          <div className="editboxfreq">
+            <label className="freqNumber">
+              <input
+                type="number"
+                min="1"
+                value={frequencyNumber}
+                onChange={(e) => {
+                  setFrequencyNumber(e.target.value);
+                }}
+              />
+            </label>
+            <select
+              className="freqType"
+              value={frequencyType}
               onChange={(e) => {
-                setFrequencyNumber(e.target.value);
+                setFrequencyType(e.target.value);
               }}
-            />
-          </label>
-          <select
-            className="freqType"
-            value={frequencyType}
-            onChange={(e) => {
-              setFrequencyType(e.target.value);
-            }}
-          >
-            <option value="daily">Day</option>
-            <option value="weekly">Week</option>
-            <option value="monthly">Month</option>
-          </select>
+            >
+              <option value="daily">Day</option>
+              <option value="weekly">Week</option>
+              <option value="monthly">Month</option>
+            </select>
+          </div>
         </div>
-        <button className="cta" onClick={handleFrequencyChange}>
+        <button className="cta saveButton" onClick={handleFrequencyChange}>
           Save
         </button>
       </form>
