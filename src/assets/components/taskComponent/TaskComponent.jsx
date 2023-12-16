@@ -67,7 +67,7 @@ export default function TaskComponent({ task }) {
     try {
       const url = `${
         import.meta.env.VITE_FIREBASE_DB_URL
-      }users/${userId}/userRooms/${params.roomId}/userTasks/${task.id}.json`;
+      }users/${userId}/userTasks/${task.id}.json`;
 
       // Get the existing task data
       const existingTaskResponse = await fetch(url);

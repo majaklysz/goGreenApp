@@ -11,7 +11,7 @@ export default function AddingRoomPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch room names when the component mounts
+    // Fetch room name
     fetchRoomNames();
   }, []);
 
@@ -53,7 +53,6 @@ export default function AddingRoomPage() {
           ...userRooms,
           [newRoomId]: {
             room_name: customRoomName,
-            // Add other properties as needed
           },
         };
       } else if (chosenRoomName !== "") {
@@ -64,7 +63,6 @@ export default function AddingRoomPage() {
           ...userRooms,
           [newRoomId]: {
             room_name: chosenRoomName,
-            // Add other properties as needed
           },
         };
       }

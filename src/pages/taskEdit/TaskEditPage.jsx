@@ -1,6 +1,6 @@
 import { getAuth } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function TaskEditPage() {
   const params = useParams();
@@ -12,11 +12,10 @@ export default function TaskEditPage() {
   const [frequencyNumber, setFrequencyNumber] = useState(0);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const location = useLocation();
-  const roomId = location.state.roomId;
+
   const url = `${
     import.meta.env.VITE_FIREBASE_DB_URL
-  }users/${userId}/userRooms/${roomId}/userTasks/${params.taskId}.json`;
+  }users/${userId}/userTasks/${params.taskId}.json`;
   const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
 
   useEffect(() => {
