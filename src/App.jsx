@@ -56,9 +56,9 @@ export default function App() {
   const publicRoutes = (
     <>
       <Routes>
-        <Route path="/log-in" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
-        <Route path="*" element={<Navigate to="/log-in" />} />
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </>
   );
