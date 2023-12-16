@@ -33,7 +33,7 @@ export default function NavBottom() {
             src={location.pathname === "/recipes" ? activeEco : Eco}
             alt="Eco Recipes for Cleaning Detergents"
           />
-          <p>Supplies</p>
+          <p>EcoRecipes</p>
         </NavLink>
       </div>
     </nav>

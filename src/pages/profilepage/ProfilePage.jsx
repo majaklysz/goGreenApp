@@ -4,7 +4,7 @@ import defaultPicture from "../../assets/icons/fi-rr-user.svg";
 import "./profilestyle.css";
 import { useNavigate } from "react-router-dom";
 import smallGreenArrow from "../../assets/icons/arrowsmallrightGreen.svg";
-
+import placeholderIcon from "../../assets/icons/fi-rr-leaf.svg";
 export default function ProfilePage() {
   const auth = getAuth();
   const navigate = useNavigate();
@@ -122,16 +122,29 @@ export default function ProfilePage() {
           </div>
         </div>
         <div className="scrollProfile">
-          {recipesToDisplay.map((recipe) => (
+          {recipesToDisplay.length === 0 ? (
             <div
-              className="recipeCard"
-              key={recipe.id}
-              onClick={() => navigate(`/recipes/${recipe.id}`)}
+              className="placecholderSaved"
+              onClick={() => navigate("/recipes")}
             >
-              <p>{recipe.name}</p>
-              <img src={smallGreenArrow} alt="arrow" />
+              <img src={placeholderIcon} alt="" />
+              <p>
+                No saved recipes yet.
+                <br /> Explore our EcoRecipes.
+              </p>
             </div>
-          ))}
+          ) : (
+            recipesToDisplay.map((recipe) => (
+              <div
+                className="recipeCard"
+                key={recipe.id}
+                onClick={() => navigate(`/recipes/${recipe.id}`)}
+              >
+                <p>{recipe.name}</p>
+                <img src={smallGreenArrow} alt="arrow" />
+              </div>
+            ))
+          )}
         </div>
       </div>
       <div>
