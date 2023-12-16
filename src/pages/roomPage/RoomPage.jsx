@@ -37,17 +37,22 @@ export default function RoomPage() {
 
   useEffect(() => {
     async function getTasks() {
-      if (!userId) return;
+      if (!userId || !params.roomId) return;
 
       const url = `${
         import.meta.env.VITE_FIREBASE_DB_URL
-      }users/${userId}/userRooms/${params.roomId}/userTasks.json`;
+      }users/${userId}/userTasks.json`;
       const response = await fetch(url);
       const data = await response.json();
-      const tasksArray = Object.keys(data).map((key) => ({
-        id: key,
-        ...data[key],
-      }));
+
+      // Filter tasks based on roomId
+      const tasksArray = Object.keys(data)
+        .filter((key) => data[key].roomId === params.roomId)
+        .map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+
       setTasks(tasksArray);
     }
 

@@ -8,46 +8,64 @@ export default function DailyListCom({ user }) {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [roomNames, setRoomNames] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function getTasks() {
       try {
-        setLoading(true);
+        const userUrl = `${import.meta.env.VITE_FIREBASE_DB_URL}users/${
+          user?.uid
+        }.json`;
 
-        const response = await fetch(
-          `https://gogreen-460d2-default-rtdb.firebaseio.com/users/${user?.uid}.json`
+        // Fetch user data
+        const userResponse = await fetch(userUrl);
+        if (!userResponse.ok) {
+          throw new Error(
+            `Failed to fetch user data: ${userResponse.statusText}`
+          );
+        }
+        const userData = await userResponse.json();
+
+        // Fetch room names
+        const roomNames = Object.keys(userData?.userRooms || {}).reduce(
+          (acc, roomId) => {
+            acc[roomId] = userData.userRooms[roomId].room_name;
+            return acc;
+          },
+          {}
         );
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch data: ${response.statusText}`);
+        setRoomNames(roomNames);
+
+        // Fetch tasks
+        const tasksUrl = `${import.meta.env.VITE_FIREBASE_DB_URL}users/${
+          user?.uid
+        }/userTasks.json`;
+
+        const tasksResponse = await fetch(tasksUrl);
+        if (!tasksResponse.ok) {
+          throw new Error(
+            `Failed to fetch tasks data: ${tasksResponse.statusText}`
+          );
         }
 
-        const data = await response.json();
+        const tasksData = await tasksResponse.json();
 
         const today = new Date().toISOString().split("T")[0];
 
-        const allTasks = Object.values(data?.userRooms || {}).reduce(
-          (acc, room) => {
-            const roomTasks = Object.values(room?.userTasks || {}).filter(
-              (task) => task.dueDate.split("T")[0] === today
-            );
-
-            // Add room name to each task
-            const tasksWithRoomName = roomTasks.map((task) => ({
-              ...task,
-              roomName: room.room_name,
-              roomId: room.id,
-            }));
-
-            acc.push(...tasksWithRoomName);
-            return acc;
-          },
-          []
-        );
-
-        const tasksDueToday = allTasks.filter((task) => {
-          return task.dueDate.split("T")[0] === today;
+        const tasksArray = Object.keys(tasksData || {}).map((key) => {
+          const task = {
+            id: key,
+            ...tasksData[key],
+          };
+          console.log("Task:", task);
+          return task;
         });
+
+        // Filter tasks due today
+        const tasksDueToday = tasksArray.filter(
+          (task) => task.dueDate.split("T")[0] === today
+        );
 
         setTasks(tasksDueToday);
         setError(null);
@@ -57,12 +75,14 @@ export default function DailyListCom({ user }) {
       } finally {
         setLoading(false);
       }
-    };
+    }
 
     if (user) {
-      fetchData();
+      getTasks();
     }
   }, [user]);
+
+  console.log(tasks);
 
   return (
     <div>
@@ -77,14 +97,14 @@ export default function DailyListCom({ user }) {
         <div className="placeholderDaily">
           <img src={smilyFaceIcon} alt="smily face" />
           <p>
-            No task left for today. <br /> Sit down and relax
+            No tasks due today. <br /> Sit down and relax
           </p>
         </div>
       )}
 
       {tasks.map((task) => (
-        <div key={task.name} className="dailyCompCardBox">
-          <p className="lilTag">{task.roomName}</p>
+        <div key={task.id} className="dailyCompCardBox">
+          <p className="lilTag">{roomNames[task.roomId]}</p>
           <TaskComponent task={task} />
         </div>
       ))}

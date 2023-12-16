@@ -31,11 +31,12 @@ export default function AddingTaskPage() {
       frequencyNumber: frequencyNumber,
       // Calculate due date based on the current date
       dueDate: calculateDueDate(frequencyType, frequencyNumber),
+      roomId: params.roomId,
     };
 
     const tasksUrl = `${import.meta.env.VITE_FIREBASE_DB_URL}users/${
       auth.currentUser.uid
-    }/userRooms/${params.roomId}/userTasks.json`;
+    }/userTasks.json`;
 
     const response = await fetch(tasksUrl, {
       method: "POST",
