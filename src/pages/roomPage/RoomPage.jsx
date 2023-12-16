@@ -85,7 +85,10 @@ export default function RoomPage() {
         </div>
         <div className="tasksContent">
           {tasks.length === 0 ? (
-            <div className="placeholderTasks">
+            <div
+              className="placeholderTasks"
+              onClick={() => navigate(`/addTask/${params.roomId}`)}
+            >
               <p>Add your first task</p>
               <img src="src/assets/icons/plusGreen.svg" alt="plus" />
             </div>

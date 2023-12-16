@@ -151,7 +151,6 @@ export default function TaskEditPage() {
               value={frequencyNumber}
               onChange={(e) => {
                 setFrequencyNumber(e.target.value);
-                handleFrequencyChange();
               }}
             />
           </label>
@@ -160,7 +159,6 @@ export default function TaskEditPage() {
             value={frequencyType}
             onChange={(e) => {
               setFrequencyType(e.target.value);
-              handleFrequencyChange();
             }}
           >
             <option value="daily">Day</option>
@@ -168,7 +166,9 @@ export default function TaskEditPage() {
             <option value="monthly">Month</option>
           </select>
         </div>
-        <button className="cta">Save</button>
+        <button className="cta" onClick={handleFrequencyChange}>
+          Save
+        </button>
       </form>
       <button onClick={handleDelete} className="deleteButton">
         Delete
