@@ -6,6 +6,10 @@
   --red: #972727;
 }
 
+#root {
+  font-family: "Lato";
+}
+
 body {
   font-size: 18px;
   font-family: "Lato";
