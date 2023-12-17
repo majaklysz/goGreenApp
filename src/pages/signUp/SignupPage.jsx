@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { app } from "../../../firebase-config";
 import "../signUp/signup.css";
 import Logo2 from "../../assets/icons/logo2.svg";
+import ArrowIcon from "../../assets/icons/fi-rr-angle-right.svg";
 
 export default function SignupPage() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -97,7 +98,7 @@ export default function SignupPage() {
             className={isDisabled ? "gray-button" : "ctaA"}
           >
             Sign Up
-            <img src="/src/assets/icons/fi-rr-angle-right.svg" alt="arrow" />
+            <img src={ArrowIcon} />
           </button>
         </form>
         <p className="text">

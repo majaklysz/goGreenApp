@@ -4,6 +4,7 @@ import { app } from "../../../firebase-config";
 import { useState } from "react";
 import "../login/Login.css";
 import Logo2 from "../../assets/icons/logo2.svg";
+import ArrowIcon from "../../assets/icons/fi-rr-angle-right.svg";
 
 export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -70,7 +71,7 @@ export default function LoginPage() {
             className={isDisabled ? "gray-button" : "ctaA"}
           >
             Login
-            <img src="/src/assets/icons/fi-rr-angle-right.svg" alt="arrow" />
+            <img src={ArrowIcon} />
           </button>
         </form>
         <p className="text">
