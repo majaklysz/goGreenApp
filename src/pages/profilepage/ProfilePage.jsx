@@ -128,7 +128,7 @@ export default function ProfilePage() {
         setSerce("🧡");
         setLevel("Gleam Guardian");
         pointsForNextLevel = 500;
-      } else {
+      } else if (points > 500) {
         setSerce("💖");
         setLevel("Master Cleaner");
         pointsForNextLevel = 600;

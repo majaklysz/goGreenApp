@@ -46,7 +46,7 @@ export default function NavTop() {
         setSerce("💜");
       } else if (400 < points && points <= 500) {
         setSerce("🧡");
-      } else {
+      } else if (points > 500) {
         setSerce("💖");
       }
     }
