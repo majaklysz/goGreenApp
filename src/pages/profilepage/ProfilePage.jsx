@@ -7,6 +7,7 @@ import defaultPicture from "../../assets/icons/fi-rr-user.svg";
 import smallGreenArrow from "../../assets/icons/arrowsmallrightGreen.svg";
 import placeholderIcon from "../../assets/icons/fi-rr-leaf.svg";
 import "./profilestyle.css";
+import EditIcon from "../../assets/icons/fi-rr-pencil.svg";
 
 export default function ProfilePage() {
   const auth = getAuth();
@@ -183,6 +184,7 @@ export default function ProfilePage() {
             value={name}
             onChange={handleNameChange}
           />
+          <img src={EditIcon} alt="edit" className="editIcon" />
         </div>
       </div>
 
