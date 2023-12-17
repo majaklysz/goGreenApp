@@ -34,15 +34,15 @@ export default function NavTop() {
 
   useEffect(() => {
     function settingPointHeart() {
-      if (0 < points <= 100) {
+      if (0 <= points && points <= 100) {
         setSerce("💛");
-      } else if (100 < points <= 200) {
+      } else if (100 < points && points <= 200) {
         setSerce("💚");
-      } else if (200 < points <= 300) {
+      } else if (200 < points && points <= 300) {
         setSerce("💙");
-      } else if (300 < points <= 400) {
+      } else if (300 < points && points <= 400) {
         setSerce("💜");
-      } else if (400 < points <= 500) {
+      } else if (400 < points && points <= 500) {
         setSerce("🧡");
       } else {
         setSerce("💖");
