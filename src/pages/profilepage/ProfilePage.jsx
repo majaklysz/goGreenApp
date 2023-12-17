@@ -141,6 +141,8 @@ export default function ProfilePage() {
     settingPointHeart();
   }, [points]);
 
+  console.log(serce);
+
   return (
     <section className="profile">
       <div className="userProfile">
@@ -153,7 +155,7 @@ export default function ProfilePage() {
                   {`${Math.round(progress)}%`}
                 </tspan>
                 <tspan x="50%" dy="15" textAnchor="middle" fontSize="8px">
-                  {`${level} ${serce}`}
+                  {`${level}`}
                 </tspan>
               </tspan>
             }

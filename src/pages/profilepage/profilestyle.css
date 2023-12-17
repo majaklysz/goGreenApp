@@ -1,6 +1,6 @@
 .userProfile {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   margin-left: 24px;
   margin-right: 24px;
@@ -22,7 +22,6 @@
   border-bottom: 1px solid white;
   width: fit-content;
   padding: 8px 16px;
-  text-align: center;
 }
 
 .userLevel {
@@ -34,7 +33,7 @@
 }
 
 .profile {
-  margin-top: 90px;
+  margin-top: 60px;
 }
 
 .userPoints {
@@ -90,8 +89,7 @@
   flex-direction: row;
   align-items: center;
   gap: 16px;
-  margin-bottom: 16px;
-  margin-top: 28px;
+  margin-bottom: 50px;
 }
 
 .userDetails img {
