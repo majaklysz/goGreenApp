@@ -93,7 +93,7 @@ export default function RoomEdit() {
           <h2>Room Setting</h2>
         </div>
         <label className="inputRoomEdit">
-          <p> Room Name:</p>
+          <p>Room Name:</p>
           <input
             type="text"
             value={name}

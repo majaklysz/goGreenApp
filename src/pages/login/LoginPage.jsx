@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { app } from "../../../firebase-config";
 import { useState } from "react";
 import "../login/Login.css";
+import Logo2 from "../../assets/icons/logo2.svg";
 
 export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("");
@@ -36,11 +37,7 @@ export default function LoginPage() {
   return (
     <section>
       <div className="pageAuth">
-        <img
-          className="logo"
-          src="/src/assets/icons/logo2.svg"
-          alt="logo greenclean"
-        />
+        <img className="logo" src={Logo2} alt="logo greenclean" />
         <p className="underLogo">
           Join now for a cleaner, greener home and embrace sustainable living
           effortlessly with our app!

@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import "./home.css";
 import { getAuth } from "@firebase/auth";
 import { useEffect, useState } from "react";
+import PlusIcon from "../../assets/icons/fi-rr-plus.svg";
+import PlusGreen from "../../assets/icons/plusGreen.svg";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -36,11 +38,7 @@ export default function Home() {
     <section>
       <div className="heading">
         <h1>Rooms</h1>
-        <img
-          onClick={handleNavigate}
-          src="src/assets/icons/fi-rr-plus.svg"
-          alt="Add plus"
-        />
+        <img onClick={handleNavigate} src={PlusIcon} alt="Add plus" />
       </div>
       <div className="roomsContent contentScrollable">
         {userRooms.length > 0 ? (
@@ -56,7 +54,7 @@ export default function Home() {
         ) : (
           <div onClick={handleNavigate} className="placeholderRooms">
             <p>Add Your First Room</p>
-            <img src="src/assets/icons/plusGreen.svg" alt="placeholder" />
+            <img src={PlusGreen} alt="placeholder" />
           </div>
         )}
       </div>

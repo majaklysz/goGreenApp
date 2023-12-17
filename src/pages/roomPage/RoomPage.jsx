@@ -3,6 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "../roomPage/room.css";
 import TaskComponent from "../../assets/components/taskComponent/TaskComponent";
+import BackArrow from "../../assets/icons/fi-rr-angle-small-left.svg";
+import SettingsIcon from "../../assets/icons/fi-rr-settings.svg";
+import PlusIcon from "../../assets/icons/fi-rr-plus.svg";
+import GreenPlusIcon from "../../assets/icons/plusGreen.svg";
 
 export default function RoomPage() {
   const [room, setRoom] = useState({});
@@ -65,17 +69,13 @@ export default function RoomPage() {
     <section>
       <div className="headlineRoom">
         <div className="nameArrow" onClick={() => navigate("/")}>
-          <img
-            className="arrowBack"
-            src="src/assets/icons/fi-rr-angle-small-left.svg"
-            alt="go back arrow"
-          />
+          <img className="arrowBack" src={BackArrow} alt="go back arrow" />
           <h2>{name}</h2>
         </div>
         <img
           onClick={() => navigate(`/editRoom/${params.roomId}`)}
           className="settingsIcon"
-          src="src/assets/icons/fi-rr-settings.svg"
+          src={SettingsIcon}
           alt="settings"
         />
       </div>
@@ -84,8 +84,8 @@ export default function RoomPage() {
           <h3>Tasks</h3>
           <img
             onClick={() => navigate(`/addTask/${params.roomId}`)}
-            src="src/assets/icons/fi-rr-plus.svg"
-            alt=""
+            src={PlusIcon}
+            alt="plus"
           />
         </div>
         <div className="tasksContent">
@@ -95,7 +95,7 @@ export default function RoomPage() {
               onClick={() => navigate(`/addTask/${params.roomId}`)}
             >
               <p>Add your first task</p>
-              <img src="src/assets/icons/plusGreen.svg" alt="plus" />
+              <img src={GreenPlusIcon} alt="plus" />
             </div>
           ) : (
             tasks.map((task) => <TaskComponent task={task} key={task.id} />)

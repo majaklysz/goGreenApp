@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import "./navtop.css";
 import { useEffect, useState } from "react";
 import { getAuth } from "@firebase/auth";
+import Logo from "../../icons/logo.svg";
+import User from "../../icons/fi-rr-user.svg";
 
 export default function NavTop() {
   const navigate = useNavigate();
@@ -56,19 +58,15 @@ export default function NavTop() {
       <img
         onClick={() => navigate("/")}
         className="logo"
-        src="src/assets/icons/logo.svg"
-        alt=""
+        src={Logo}
+        alt="logo"
       />
       <div className="user" onClick={() => navigate("/profile")}>
         <div className="streak">
           {serce} {points} pt
         </div>
         <div>
-          <img
-            className="userPic"
-            src="src/assets/icons/fi-rr-user.svg"
-            alt=""
-          />
+          <img className="userPic" src={User} alt="user" />
         </div>
       </div>
     </nav>
