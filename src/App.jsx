@@ -17,51 +17,51 @@ import RecipePage from "./pages/recipePage/RecipePage";
 import ProfilePage from "./pages/profilepage/ProfilePage";
 
 export default function App() {
-  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
-  useEffect(() => {
-    const auth = getAuth();
+    const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth")); // start default value comes from localStorage
+    useEffect(() => {
+        const auth = getAuth();
 
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        //user is authenticated / signed in
-        setIsAuth(true); // set isAuth to true
-        localStorage.setItem("isAuth", true); // also, save isAuth in localStorage
-      } else {
-        // user is not authenticated / not signed in
-        setIsAuth(false); // set isAuth to false
-        localStorage.removeItem("isAuth"); // remove isAuth from localStorage
-      }
-    });
-  }, []);
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                //user is authenticated / signed in
+                setIsAuth(true); // set isAuth to true
+                localStorage.setItem("isAuth", true); // also, save isAuth in localStorage
+            } else {
+                // user is not authenticated / not signed in
+                setIsAuth(false); // set isAuth to false
+                localStorage.removeItem("isAuth"); // remove isAuth from localStorage
+            }
+        });
+    }, []);
 
-  const privateRoutes = (
-    <>
-      <NavTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/addRoom" element={<AddingRoomPage />} />
-        <Route path="/:roomId" element={<RoomPage />} />
-        <Route path="/addTask/:roomId" element={<AddingTaskPage />} />
-        <Route path="/editRoom/:roomId" element={<RoomEdit />} />
-        <Route path="/dailyList" element={<DailyListPage />} />
-        <Route path="/editTask/:taskId" element={<TaskEditPage />} />
-        <Route path="/recipes" element={<RecipesPage />} />
-        <Route path="/recipes/:recipeId" element={<RecipePage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-      <NavBottom />
-    </>
-  );
-  const publicRoutes = (
-    <>
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/sign-up" element={<SignupPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </>
-  );
+    const privateRoutes = (
+        <>
+            <NavTop />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/addRoom" element={<AddingRoomPage />} />
+                <Route path="/:roomId" element={<RoomPage />} />
+                <Route path="/addTask/:roomId" element={<AddingTaskPage />} />
+                <Route path="/editRoom/:roomId" element={<RoomEdit />} />
+                <Route path="/dailyList" element={<DailyListPage />} />
+                <Route path="/editTask/:taskId" element={<TaskEditPage />} />
+                <Route path="/recipes" element={<RecipesPage />} />
+                <Route path="/recipes/:recipeId" element={<RecipePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+            <NavBottom />
+        </>
+    );
+    const publicRoutes = (
+        <>
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/sign-up" element={<SignupPage />} />
+                <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+        </>
+    );
 
-  return <main>{isAuth ? privateRoutes : publicRoutes}</main>;
+    return <main>{isAuth ? privateRoutes : publicRoutes}</main>;
 }
