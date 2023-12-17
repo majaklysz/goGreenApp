@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getAuth } from "@firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../addingRoom/adding.css";
-
+import Plus from "../../assets/icons/fi-rr-plus-small.svg";
 export default function AddingRoomPage() {
   const auth = getAuth();
   const [rooms, setRooms] = useState([]);
@@ -127,7 +127,7 @@ export default function AddingRoomPage() {
         )}
 
         <button className="cta" onClick={addRoom}>
-          <img src="src/assets/icons/fi-rr-plus-small.svg" alt="" />
+          <img src={Plus} alt="" />
           Add Room
         </button>
       </div>
