@@ -7,12 +7,12 @@
 }
 
 #root {
-  font-family: "Lato";
+  font-family: sans-serif;
 }
 
 body {
   font-size: 18px;
-  font-family: "Lato";
+  font-family: sans-serif;
   background: var(--background);
   color: white;
   margin: 0 auto;
