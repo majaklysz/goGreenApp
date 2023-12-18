@@ -64,7 +64,7 @@ export default function RecipePage() {
   return (
     <div key={recipe.id}>
       <div className="headlineRecipe">
-        <div className="arrowBackRecipes" onClick={() => navigate("/recipes")}>
+        <div className="arrowBackRecipes" onClick={() => navigate(-1)}>
           <img className="arrowBack" src={arrowBack} alt="go back arrow" />
           <h1>{recipe.name}</h1>
         </div>
